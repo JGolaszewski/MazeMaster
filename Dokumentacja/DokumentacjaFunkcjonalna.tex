@@ -1,0 +1,76 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+
+\title {Maze Master \\[1ex] \large Dokumentacja funkcjonalna}
+\date{\today}
+\author{Jędrzej Gołaszewski i Szymon Stasiak}
+
+\newcommand*{\subtext}[1]{\normalsize{\normalfont{#1}}}
+\newcommand*{\param}[1]{[-\texttt{#1}]}
+\newcommand*{\params}[2]{[-\texttt{#1}|- -\texttt{#2}]}
+
+\begin{document}
+    \pagenumbering{gobble}
+    \maketitle
+    \newpage
+    \pagenumbering{arabic}
+    \section{Opis główny}
+    \subsection{Nazwa programu \subtext{
+        Maze master
+    }} 
+    \subsection{Opis problemu \subtext{
+        Problemem, który rozwiązuje program jest znalezienie optymalnej trasy
+        pomiędzy punktem początkowym a końcowym w labiryncie. Program musi 
+        przeanalizować strukturę labiryntu, zidentyfikować przeszkody i
+        wyznaczyć najkrótszą ścieżkę, umożliwiając efektywne nawigowanie od
+        punktu startowego do celu. To narzędzie stworzone jest w celu automatyzacji 
+        procesu rozwiązywania labiryntów, eliminując konieczność ręcznego
+        poszukiwania optymalnej drogi i umożliwiając szybkie, skuteczne 
+        rozwiązanie tego zadania
+    }}
+    \subsection{Użytkownik docelowy \subtext{
+        Użytkownikiem docelowym programu jest osoba poszukująca rozwiązania
+        labiryntu najkródszą ścieżką. Program może mieć zastosowanie w badaniu
+        algorytmów nawigacyjnych, grach komputerowych czy rozwiązywania łamigłówek
+    }}
+
+    \section{Opis funkcjonalności}
+    \subsection{Jak korzystać z programu \subtext{
+        Aby skorzystać z programu należy wpisać komendę: 
+    } \texttt{./MazeMaster [argumenty programu]}}
+    \subsection{Uruchamianie programu \subtext{
+        Lista parametrów programu:
+    }}
+    \subsubsection{
+        Dane wejściowe \params{i}{in} \subtext{Podajemy nazwę pliku z labiryntem jeśli jest w katalogu in bądź pełną ścieżkępliku}
+    }
+    \subsubsection{
+        Dane wyjściowe \params{o}{out} \subtext{Podajemy nazwę pliku który będzie zawierał nasze dane wyjściowe}
+    }
+    \subsubsection{
+        Pomoc \params{h}{help} \subtext{Flagi pomocy (wpisanie ich spowoduje że program wypisze pomoc ale nie uruchomi się)}
+    }
+    \subsubsection{
+        Verbose \params{v}{verbose} \subtext{Flagi które sprawią że program będzie wypisywał więcej informacji które mogą byćprzydatne}
+    }
+    \subsubsection{
+        Debug \params{d}{debug} \subtext{Flagi które sprawią że program będzie wypisywał informację potrzebne do debugowania}
+    }
+    \subsection{Możliwości programu:}
+    \subsubsection{Poprawnie wczytanie danych labiryntu}
+    \subsubsection{Zapsisanie danych wyjściowych w czytelnym formacie}
+    \subsubsection{Znalezienie najkródszej drogi z miejsca A do B}
+    \subsubsection{Znalezienie najkródszego wyjścia z labiryntu}
+
+    \newpage
+
+    \section{Format danych i struktura plików}
+    \subsection{Struktura katalogów}
+    \subsection{Dane wejściowe}
+    \subsection{Dane wyjściowe}
+
+    \section{Scenariusz działania programu}
+    \section{Testowanie}
+    \subsection{Przebieg testowania}
+\end{document}
