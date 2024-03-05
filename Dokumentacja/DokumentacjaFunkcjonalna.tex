@@ -65,12 +65,34 @@
 
     \newpage
 
-    \section{Format danych i struktura plików}
-    \subsection{Struktura katalogów}
-    \subsection{Dane wejściowe}
-    \subsection{Dane wyjściowe}
+  \section{Format danych i struktura plików}
+   \subtext{
+        Program zakłada następującą strukturę katalogów:
 
-    \section{Scenariusz działania programu}
+             \subsection{input/\subtext{ Katalog zawierający pliki wejściowe z labiryntem.}}
+             \subsection{output/\subtext{ Katalog zawierający pliki wyjściowe z wynikami działania programu.}}
+        
+    }
+    
+    \subsection{Dane wejściowe \subtext{
+        Dane wejściowe programu są plikami tekstowymi opisującymi strukturę labiryntu. Każdy plik wejściowy zawiera informacje o labiryncie, gdzie poszczególne znaki reprezentują różne elementy labiryntu, takie jak ściany, wolne przestrzenie, punkt startowy i punkt końcowy.
+    }}
+    \subsection{Dane wyjściowe \subtext{
+        Dane wyjściowe programu są również plikami tekstowymi, w których zawarte są wyniki działania programu, takie jak znaleziona najkrótsza ścieżka z punktu startowego do punktu końcowego oraz ewentualne dodatkowe informacje diagnostyczne.
+    }}
+
+    
+    \section{Scenariusz działania programu \subtext{
+        Przedstawiony poniżej jest ogólny scenariusz działania programu:
+        \begin{enumerate}
+            \item Użytkownik uruchamia program z odpowiednimi parametrami, wskazując plik wejściowy z labiryntem.
+            \item Program wczytuje dane z pliku wejściowego, analizuje strukturę labiryntu oraz znajduje najkrótszą ścieżkę z punktu startowego do punktu końcowego.
+            \item Program zapisuje wyniki działania do pliku wyjściowego w czytelnym formacie.
+            \item Opcjonalnie, jeśli użytkownik wybrał tryb debugowania lub verbose, program wypisuje dodatkowe informacje diagnostyczne.
+        \end{enumerate}
+    }}
+
     \section{Testowanie}
-    \subsection{Przebieg testowania}
+  \subsection{Ogólny przebieg testowania}
+Testowanie programu będzie przeprowadzone z wykorzystaniem odpowiednich narzędzi, takich jak JUnit dla testów jednostkowych oraz testowanie ręczne podczas tworzenia aplikacji. Ważnym elementem testowania będzie także zapewnienie odporności programu na różne sytuacje wyjątkowe oraz błędy, aby zapewnić jego stabilność i niezawodność w działaniu.
 \end{document}

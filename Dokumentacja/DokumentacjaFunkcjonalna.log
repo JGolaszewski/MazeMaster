@@ -1,60 +1,44 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.2.27)  2 MAR 2024 09:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.3.5)  5 MAR 2024 19:32
 entering extended mode
  restricted \write18 enabled.
- file:line:error style messages enabled.
  %&-line parsing enabled.
-**c:/Users/golas/JIMP/LabiryntJimp2/Dokumentacja/DokumentacjaFunkcjonalna.tex
-(c:/Users/golas/JIMP/LabiryntJimp2/Dokumentacja/DokumentacjaFunkcjonalna.tex
-LaTeX2e <2023-11-01> patch level 1
-L3 programming layer <2024-01-04>
-(C:\Users\golas\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
-Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
-(C:\Users\golas\AppData\Local\Programs\MiKTeX\tex/latex/base\size10.clo
-File: size10.clo 2023/05/17 v1.4n Standard LaTeX file (size option)
+**DokumentacjaFunkcjonalna.tex
+(./DokumentacjaFunkcjonalna.tex
+LaTeX2e <2021-11-15> patch level 1
+L3 programming layer <2022-01-21>
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2021/10/04 v1.4n Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2021/10/04 v1.4n Standard LaTeX file (size option)
 )
-\c@part=\count187
-\c@section=\count188
-\c@subsection=\count189
-\c@subsubsection=\count190
-\c@paragraph=\count191
-\c@subparagraph=\count192
-\c@figure=\count193
-\c@table=\count194
-\abovecaptionskip=\skip48
-\belowcaptionskip=\skip49
-\bibindent=\dimen140
-) (C:\Users\golas\AppData\Local\Programs\MiKTeX\tex/latex/base\fontenc.sty
+\c@part=\count185
+\c@section=\count186
+\c@subsection=\count187
+\c@subsubsection=\count188
+\c@paragraph=\count189
+\c@subparagraph=\count190
+\c@figure=\count191
+\c@table=\count192
+\abovecaptionskip=\skip47
+\belowcaptionskip=\skip48
+\bibindent=\dimen138
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
 Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
-) (C:\Users\golas\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.sty (C:\Users\golas\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
-Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
-\KV@toks@=\toks17
 )
-\lst@mode=\count195
-\lst@gtempboxa=\box51
-\lst@token=\toks18
-\lst@length=\count196
-\lst@currlwidth=\dimen141
-\lst@column=\count197
-\lst@pos=\count198
-\lst@lostspace=\dimen142
-\lst@width=\dimen143
-\lst@newlines=\count199
-\lst@lineno=\count266
-\lst@maxwidth=\dimen144
- (C:\Users\golas\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstmisc.sty
-File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
-\c@lstnumber=\count267
-\lst@skipnumbers=\count268
-\lst@framebox=\box52
-) (C:\Users\golas\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.cfg
-File: listings.cfg 2023/02/27 1.9 listings configuration
-))
-Package: listings 2023/02/27 1.9 (Carsten Heinz)
- (C:\Users\golas\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
-File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count269
-\l__pdf_internal_box=\box53
-) (DokumentacjaFunkcjonalna.aux)
+
+! LaTeX Error: File `listings.sty' not found.
+
+Type X to quit or <RETURN> to proceed,
+or enter new name. (Default extension: sty)
+
+Enter file name: 
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2022-01-12 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count193
+\l__pdf_internal_box=\box50
+)
+(./DokumentacjaFunkcjonalna.aux)
 \openout1 = `DokumentacjaFunkcjonalna.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 13.
@@ -71,7 +55,6 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 13.
 LaTeX Font Info:    ... okay on input line 13.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 13.
 LaTeX Font Info:    ... okay on input line 13.
-\c@lstlisting=\count270
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <12> on input line 15.
 LaTeX Font Info:    External font `cmex10' loaded for size
@@ -80,31 +63,62 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 15.
  [1
 
-{C:/Users/golas/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
-LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 41.
- (C:\Users\golas\AppData\Local\Programs\MiKTeX\tex/latex/base\t1cmtt.fd
-File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 4
+1.
+ (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
+File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10> not available
 (Font)              Font shape `T1/cmtt/m/n' tried instead on input line 41.
- [1] [2] (DokumentacjaFunkcjonalna.aux)
- ***********
-LaTeX2e <2023-11-01> patch level 1
-L3 programming layer <2024-01-04>
- ***********
- ) 
+ [1]
+Runaway argument?
+{ Program zakłada następującą strukturę katalogów: 
+! Paragraph ended before \subtext was complete.
+<to be read again> 
+                   \par 
+l.71 
+     
+? 
+! Too many }'s.
+l.75     }
+          
+? 
+! Argument of \@sect has an extra }.
+<inserted text> 
+                \par 
+l.93     }}
+           
+? 
+Runaway argument?
+{\normalfont \Large \bfseries }{\@item }\def \reserved@b {\@noitemargtrue \ETC.
+! Paragraph ended before \@sect was complete.
+<to be read again> 
+                   \par 
+l.93     }}
+           
+? 
+[2] (./DokumentacjaFunkcjonalna.aux) ) 
 Here is how much of TeX's memory you used:
- 2115 strings out of 474486
- 32349 string characters out of 5743755
- 1931542 words of memory out of 5000000
- 24445 multiletter control sequences out of 15000+600000
- 566508 words of font info for 53 fonts, out of 8000000 for 9000
- 1141 hyphenation exceptions out of 8191
- 41i,6n,51p,763b,266s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\golas\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1000.pk> <C:\Users\golas\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1000.pk> <C:\Users\golas\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1000.pk> <C:\Users\golas\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\golas\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\golas\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\golas\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1728.pk>
-Output written on DokumentacjaFunkcjonalna.pdf (3 pages, 82882 bytes).
+ 684 strings out of 480247
+ 10596 string characters out of 5896152
+ 298736 words of memory out of 5000000
+ 18686 multiletter control sequences out of 15000+600000
+ 477698 words of font info for 45 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 34i,6n,38p,716b,221s stack positions out of 5000i,500n,10000p,200000b,80000s
+ </home/szymon/.texlive2021/texmf-var/fon
+ts/pk/ljfour/jknappen/ec/ecbx1000.600pk> </home/szymon/.texlive2021/texmf-var/f
+onts/pk/ljfour/jknappen/ec/ectt1000.600pk> </home/szymon/.texlive2021/texmf-var
+/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </home/szymon/.texlive2021/texmf-v
+ar/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </home/szymon/.texlive2021/texmf
+-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </home/szymon/.texlive2021/tex
+mf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </home/szymon/.texlive2021/t
+exmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1728.600pk>
+Output written on DokumentacjaFunkcjonalna.pdf (3 pages, 73916 bytes).
 PDF statistics:
- 265 PDF objects out of 1000 (max. 8388607)
+ 276 PDF objects out of 1000 (max. 8388607)
+ 36 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
