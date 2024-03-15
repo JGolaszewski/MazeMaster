@@ -45,8 +45,9 @@ int main(int argc, char** argv) {
                 exit(EXIT_FAILURE);
         }
     }
-    checkFile("in", &input_file);
-    checkFile("out", &output_file);
+    checkFile("input", &input_file);
+    checkFile("output", &output_file);
+    checkIfNotTheSame(&input_file, &input_file);
     
 
 
@@ -54,11 +55,10 @@ int main(int argc, char** argv) {
     printf("Output file: %s\n", output_file);
     printf("Verbose mode: %s\n", verbose ? "enabled" : "disabled");
     printf("Debug mode: %s\n", debug ? "enabled" : "disabled");
-
-
+    FILE* f = openFile(input_file);
 /*
 
-    FILE* f = fopen("../in/maze.txt", "r");
+
     if(!f) return -1;
 
     fseek(f, 0, SEEK_END);
