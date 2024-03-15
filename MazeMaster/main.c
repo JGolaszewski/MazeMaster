@@ -14,7 +14,7 @@
 
 int main(int argc, char** argv) {
 
-int opt;
+    int opt;
     char *input_file = NULL;
     char *output_file = NULL;
     int verbose = 0;
@@ -45,6 +45,9 @@ int opt;
                 exit(EXIT_FAILURE);
         }
     }
+    checkFile("in", &input_file);
+    checkFile("out", &output_file);
+    
 
 
     printf("Input file: %s\n", input_file);
@@ -70,5 +73,8 @@ int opt;
     size_t s = countLines(f);
 
     printf("%d %d", (int)s, (int)((size-s)/s));*/
+    
+    free(input_file);
+    free(output_file);
     return 0;
 }

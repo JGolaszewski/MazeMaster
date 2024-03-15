@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 #include "interface.h"
 
 
@@ -13,6 +15,29 @@ void print_help(char *program_name) {
     printf("  -q|- -quit \n");
 }
 
-/*void checkIfProperArg(int arg, char *filename[], char *output[]) {
+void checkFile(char *name, char **file) {
 
-}*/
+    if (*file == NULL) {
+        *file = (char *)malloc(100 * sizeof(char)); 
+        if (*file == NULL) {
+            printf("Memory allocation failed.\n");
+            exit(EXIT_FAILURE);
+        }
+    }
+
+    printf("Please give file \"%s\": ", name);
+    scanf("%s", *file);
+
+
+    while (strcmp(*file + strlen(*file) - 4, ".txt") != 0) {
+        printf("The file must have a \".txt\" extension. Please provide a valid file: ");
+        scanf("%s", *file);
+    }
+
+
+    *file = (char *)realloc(*file, (strlen(*file) + 1) * sizeof(char));
+    if (*file == NULL) {
+        printf("Memory reallocation failed.\n");
+        exit(EXIT_FAILURE);
+    }
+}
