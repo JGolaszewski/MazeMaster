@@ -3,6 +3,7 @@
 #include <unistd.h>
 
 #include "interface.h"
+#include "reports.h"
 
 /*size_t countLines(FILE* f) {
     size_t count = 0;
@@ -13,7 +14,7 @@
 }*/
 
 int main(int argc, char** argv) {
-
+	
     int opt;
     char *input_file = NULL;
     char *output_file = NULL;
