@@ -37,21 +37,24 @@ void toGraph(FILE* out, const char* buffers[3], const USHORT lineSize, const USH
         UCHAR countRoads = 0;
         //CHECK LEFT AND RIGHT ROAD
         if(i != 0) {
-            countRoads += 1 - GET_BIT(buffers[1], i-1);
+            countRoads = (countRoads | 1 - GET_BIT(buffers[1], i-1))<<1;
+        } else {
+            countRoads <<= 1;
         }
         if(i < lineSize-1) {
-            countRoads += 1 - GET_BIT(buffers[1], i+1);
+            countRoads = (countRoads | 1 - GET_BIT(buffers[1], i+1))<<1;
+        } else {
+            countRoads <<= 1;
         }
 
         //CHECK TOP AND BOTTOM ROAD
-        countRoads += 1 - GET_BIT(buffers[0], i);
-        countRoads += 1 - GET_BIT(buffers[2], i);
+        countRoads = (countRoads | 1 - GET_BIT(buffers[0], i-1))<<1;
+        countRoads = (countRoads | 1 - GET_BIT(buffers[2], i-1));
 
-        //STORE NODE (INTERSECTION) IN TEMP FILE
-        if(countRoads > 2) {
+        //STORE NODE (INTERSECTION / TURN) IN TEMP FILE
+        if(countRoads&0b1100 > 0 && countRoads&0b11 > 0) {
             fprintf(out, TEMP_NODE_FORMAT(i, height, 0));
         } 
-       // getchar();
     }
 }
 
@@ -77,7 +80,7 @@ void parseFile(const char* filename) {
     readLineBit(in, &buffers[2], &lineSize);
 
     while(!feof(in)) {
-        //FIND INTERSECTIONS
+        //FIND INTERSECTIONS / TURN
         toGraph(nodeFile, buffers, lineSize, height);
 
         //SHIFT BUFFERS
