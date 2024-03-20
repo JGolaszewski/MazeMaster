@@ -5,14 +5,21 @@
 #define WALL_CHAR 'X'
 
 //TYPE MAKRO
+#define UINT unsigned int
 #define USHORT unsigned short
-#define UCHAR unsigned 
+#define UCHAR unsigned char
 
 //NAME MAKRO
 #define TEMP_NODE_FILENAME "../temp/tempNodes.txt"
+#define TEMP_MATRIX_FILENAME "../temp/tempMatrix.txt"
 
 //FILE FORMATTING
-#define TEMP_NODE_FORMAT(x, y, flag) "%d %d %d\n", (x), (y), (flag)
+//Data:
+//id - id of node
+//x - coordinate
+//y - coordinate
+//Additional flag binary: First 4 bits(Additional info), Last 4 bits(Connection: (LEFT)(RIGHT)(TOP)(BOTTOM))
+#define TEMP_NODE_FORMAT(id, x, y, flag) "%d %d %d %d\n", (id), (x), (y), (flag)
 
 //BIT OPERATIONS MAKRO
 #define GET_BIT(byteArr, n) \

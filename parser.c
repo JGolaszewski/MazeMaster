@@ -32,29 +32,41 @@ void readLineBit(FILE* in, char** outBuffer, USHORT* size) {
     }    
 }
 
-void toGraph(FILE* out, const char* buffers[3], const USHORT lineSize, const USHORT height) {
+void toGraph(FILE* out, FILE* adjMatrix, const char* buffers[3], const USHORT lineSize, const USHORT height) {
+    //TODO: Add horizontal connections to adjacency matrix
+    
+    //BITS: 0b(PREV LEFT)(PREV RIGHT)(PREV TOP)(PREV BOTTOM)(LEFT)(RIGHT)(TOP)(BOTTOM)    
+    UCHAR roadData = 0;
+    static UINT id = 0;
+    UINT nodeId = 0;
     for(USHORT i = 0; i < lineSize; i++) {
-        UCHAR countRoads = 0;
+
         //CHECK LEFT AND RIGHT ROAD
         if(i != 0) {
-            countRoads = (countRoads | 1 - GET_BIT(buffers[1], i-1))<<1;
-        } else {
-            countRoads <<= 1;
+            roadData |= (1 - GET_BIT(buffers[1], i-1)) << 3;
         }
+
         if(i < lineSize-1) {
-            countRoads = (countRoads | 1 - GET_BIT(buffers[1], i+1))<<1;
-        } else {
-            countRoads <<= 1;
+            roadData |= (1 - GET_BIT(buffers[1], i+1)) << 2;
         }
 
         //CHECK TOP AND BOTTOM ROAD
-        countRoads = (countRoads | 1 - GET_BIT(buffers[0], i-1))<<1;
-        countRoads = (countRoads | 1 - GET_BIT(buffers[2], i-1));
+        roadData |= (1 - GET_BIT(buffers[0], i)) << 1;
+        roadData |= 1 - GET_BIT(buffers[2], i);
 
         //STORE NODE (INTERSECTION / TURN) IN TEMP FILE
-        if(countRoads&0b1100 > 0 && countRoads&0b11 > 0) {
-            fprintf(out, TEMP_NODE_FORMAT(i, height, 0));
-        } 
+        if((roadData&0b1100) > 0 && (roadData&0b11) > 0) {
+            fprintf(out, TEMP_NODE_FORMAT(id++, i, height, roadData&0b1111));
+            
+            if((roadData & 0b01000000) > 0 && (roadData & 0b00001000) > 0) {
+                fprintf(adjMatrix, "%d %d\n%d %d\n",id-2, id-1, id-1, id-2);
+            }
+
+            //SHIFT INTERSECTION TO PREV INTERSECTION
+            roadData <<= 4;
+        }
+
+    roadData &= 0b11110000;
     }
 }
 
@@ -64,6 +76,7 @@ void parseFile(const char* filename) {
     FILE* matrixFile = NULL;
     fopen_s(&in, filename, "r");
     fopen_s(&nodeFile, TEMP_NODE_FILENAME, "w");
+    fopen_s(&matrixFile, TEMP_MATRIX_FILENAME, "w");
 
     char* buffers[3];
     USHORT lineSize = 0;
@@ -81,7 +94,7 @@ void parseFile(const char* filename) {
 
     while(!feof(in)) {
         //FIND INTERSECTIONS / TURN
-        toGraph(nodeFile, buffers, lineSize, height);
+        toGraph(nodeFile, matrixFile, buffers, lineSize, height);
 
         //SHIFT BUFFERS
         free(buffers[0]);
@@ -93,10 +106,11 @@ void parseFile(const char* filename) {
         height++;
     }
 
+    //TODO: Add vertical connections to adjacency matrix
+    //TODO: (Optional) smooth the graph by removing turns 
+
     //FREE BUFFERS MEM
     free(buffers[0]);
     free(buffers[1]);
     free(buffers[2]);
-
-    //TODO: Adjacency matrix
 }
