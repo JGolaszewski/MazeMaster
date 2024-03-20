@@ -1,5 +1,4 @@
-#ifndef REPORTS_H
-#define REPORTS_H
+#pragma once
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,5 +11,3 @@ void report_error_exit(const char *msg) {
     fprintf(stderr, "ERROR: %s\n", msg);
     exit(EXIT_FAILURE);
 }
-
-#endif 
