@@ -1,8 +1,4 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
 #include "interface.h"
-
 
 void print_help(char *program_name) {
     printf("Usage: %s -i|- -in  <filename> -o|- -out <output> \n");
@@ -44,23 +40,21 @@ void checkFile(char *name, char **file) {
 
 
 FILE* openFile(const char* filename) {
-    char* dynamicFilename = strdup(filename); 
+    char* dynamicFilename = (char *)malloc(100 * sizeof(char)); 
+    dynamicFilename = filename;
     if (dynamicFilename == NULL) {
         printf("Memory allocation failed.\n");
         exit(EXIT_FAILURE);
     }
 
-    FILE* file = fopen(dynamicFilename, "r");
-    while (file == NULL) {
+
+    while (access(dynamicFilename,F_OK)!=0) {
         printf("File \"%s\" does not exist. Please provide another file:\n", dynamicFilename);
         scanf("%s", dynamicFilename);
  	  while (strcmp(dynamicFilename + strlen(dynamicFilename) - 4, ".txt") != 0) {
         printf("The file must have a \".txt\" extension. Please provide a valid file: ");
         scanf("%s", dynamicFilename);
         }
-        file = fopen(dynamicFilename, "r");
-        
-        
     }
 
 
@@ -69,7 +63,7 @@ FILE* openFile(const char* filename) {
         printf("Memory reallocation failed.\n");
         exit(EXIT_FAILURE);
     }
-
+    FILE* file = fopen(dynamicFilename, "r");
     return file;
 }
 

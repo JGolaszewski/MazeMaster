@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <getopt.h>
 
+#include "parser.h"
 #include "interface.h"
 #include "reports.h"
 
@@ -46,6 +48,7 @@ int main(int argc, char** argv) {
     printf("Verbose mode: %s\n", verbose ? "enabled" : "disabled");
     printf("Debug mode: %s\n", debug ? "enabled" : "disabled");
     
+
     parseFile(input_file);
 
     return 0;

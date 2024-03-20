@@ -74,9 +74,9 @@ void parseFile(const char* filename) {
     FILE* in = NULL;
     FILE* nodeFile = NULL;
     FILE* matrixFile = NULL;
-    fopen_s(&in, filename, "r");
-    fopen_s(&nodeFile, TEMP_NODE_FILENAME, "w");
-    fopen_s(&matrixFile, TEMP_MATRIX_FILENAME, "w");
+    in = openFile( filename);
+    nodeFile=fopen( TEMP_NODE_FILENAME, "w");
+    matrixFile = fopen( TEMP_MATRIX_FILENAME, "w");
 
     char* buffers[3];
     USHORT lineSize = 0;
