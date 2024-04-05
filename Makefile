@@ -1,2 +1,13 @@
-Main:
-	cc -std=c17 -pedantic  -o "./bin/bin.exe" main.c parser.c interface.c 
+CC := cc
+
+OUTFILENAME := bin.exe
+OUTDIR := ./bin
+
+PROGRAMDIR := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
+MACROS := -DPROGRAM_DIR="\"$(PROGRAMDIR)"\"
+CFLAGS := -std=c2x -pedantic -Wall
+
+CFILES := main.c parser.c interface.c graph.c
+
+all:
+	$(CC) $(MACROS) $(CFLAGS) -o "$(OUTDIR)/$(OUTFILENAME)" $(CFILES)

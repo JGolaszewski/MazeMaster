@@ -2,17 +2,24 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <getopt.h>
+#include <linux/limits.h>
 
+#include "graph.h"
 #include "parser.h"
 #include "interface.h"
 #include "reports.h"
 
+UCHAR verbose = 0;
+UCHAR debug = 0;
+
 int main(int argc, char** argv) {
+    #ifndef PROGRAM_DIR
+        R_ERROR("Program directory not defined! Recompile program with given Makefile!");
+    #endif
+    
     int opt;
     char *input_file = NULL;
     char *output_file = NULL;
-    int verbose = 0;
-    int debug = 0;
 
     while ((opt = getopt(argc, argv, "i:o:vdhq")) != -1) {
         switch (opt) {
@@ -34,22 +41,24 @@ int main(int argc, char** argv) {
             case 'q':
                 printf("Exiting program...\n");
                 exit(EXIT_SUCCESS);
-            default: /* '?' */
-                fprintf(stderr, "Usage: %s -i <input_file> -o <output_file> [-v] [-d] [-h] [-q]\n", argv[0]);
-                exit(EXIT_FAILURE);
+            default:
+            
         }
     }
-    checkFile("input", &input_file);
-    checkFile("output", &output_file);
-    checkIfNotTheSame(&input_file, &output_file);
+    chdir(PROGRAM_DIR);
+    R_DEBUG("Working dir: %s", PROGRAM_DIR);
 
-    printf("Input file: %s\n", input_file);
-    printf("Output file: %s\n", output_file);
-    printf("Verbose mode: %s\n", verbose ? "enabled" : "disabled");
-    printf("Debug mode: %s\n", debug ? "enabled" : "disabled");
-    
+    if(input_file == NULL) R_ERROR("Input file not specified!");
+    if(input_file == output_file) R_ERROR("Input file is the same as output file");
 
+    R_VERBOSE("Input file: %s", input_file);
+    R_VERBOSE("Output file: %s", (output_file==NULL)? "Not specified": output_file);
+
+    R_VERBOSE("Parsing to graph...");
     parseFile(input_file);
-
+    FILE* nodes = openFile(TEMP_NODE_FILENAME, "r");
+    getNode(nodes, 1, 1);
+    //getNode(nodes, 1, 1);
+    //printf("%c%c%c%c%c%c%c", nod[0], nod[1], nod[2], nod[3], nod[4], nod[5], nod[6]);
     return 0;
 }

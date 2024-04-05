@@ -10,16 +10,7 @@
 #define UCHAR unsigned char
 
 //NAME MAKRO
-#define TEMP_NODE_FILENAME "../temp/tempNodes.txt"
-#define TEMP_MATRIX_FILENAME "../temp/tempMatrix.txt"
-
-//FILE FORMATTING
-//Data:
-//id - id of node
-//x - coordinate
-//y - coordinate
-//Additional flag binary: First 4 bits(Additional info), Last 4 bits(Connection: (LEFT)(RIGHT)(TOP)(BOTTOM))
-#define TEMP_NODE_FORMAT(id, x, y, flag) "%d %d %d %d\n", (id), (x), (y), (flag)
+#define TEMP_NODE_FILENAME "./temp/tempNodes.txt"
 
 //BIT OPERATIONS MAKRO
 #define GET_BIT(byteArr, n) \

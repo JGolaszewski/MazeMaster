@@ -1,13 +1,18 @@
 #pragma once
 
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include <assert.h>
 
-#define REPORT_ERROR(msg) fprintf(stderr, "ERROR: %s\n", msg)
-#define REPORT_WARNING(msg) fprintf(stderr, "WARNING: %s\n", msg)
-#define REPORT_INFO(msg) fprintf(stdout, "INFO: %s\n", msg)
+#include "macros.h"
 
-void report_error_exit(const char *msg) {
-    fprintf(stderr, "ERROR: %s\n", msg);
-    exit(EXIT_FAILURE);
-}
+extern UCHAR verbose;
+extern UCHAR debug;
+
+#define R_ERROR(format, ...) {fprintf(stderr, "ERROR: "); fprintf(stderr, format __VA_OPT__(, ) __VA_ARGS__); fprintf(stderr, "\n"); exit(EXIT_FAILURE);}
+#define R_ASSERT(expression) {assert(expression);}
+#define R_WARNING(format, ...) {fprintf(stderr, "WARNING: "); fprintf(stderr, format __VA_OPT__(, ) __VA_ARGS__); fprintf(stderr, "\n");}
+#define R_INFO(format, ...) {fprintf(stderr, "INFO: "); fprintf(stderr, format __VA_OPT__(, ) __VA_ARGS__); fprintf(stderr, "\n");}
+
+#define R_VERBOSE(format, ...) {if(verbose){fprintf(stderr, "VERBOSE: "); fprintf(stderr, format __VA_OPT__(, ) __VA_ARGS__); fprintf(stderr, "\n");}}
+#define R_DEBUG(format, ...) {if(debug){fprintf(stderr, "DEBUG: "); fprintf(stderr, format __VA_OPT__(, ) __VA_ARGS__); fprintf(stderr, "\n");}}

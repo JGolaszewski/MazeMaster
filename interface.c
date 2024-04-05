@@ -11,80 +11,15 @@ void print_help(char *program_name) {
     printf("  -q|- -quit \n");
 }
 
-void checkFile(char *name, char **file) {
+FILE* openFile(const char* filename, const char* mode) {
+    int idMode = -1;
+    USHORT it = 0;
 
-    if (*file == NULL) {
-        *file = (char *)malloc(100 * sizeof(char)); 
-        if (*file == NULL) {
-            printf("Memory allocation failed.\n");
-            exit(EXIT_FAILURE);
-        }
-    }
+    while(mode[it] != '\0') if(mode[it++] == 'r') idMode = F_OK;
+    if(idMode != -1 && access(filename, idMode)) R_ERROR("Couldt open file: %s", filename);
 
-    printf("Please give file %s: ", name);
-    scanf("%s", *file);
+    R_DEBUG("Opening file: %s", filename);
 
-
-    while (strcmp(*file + strlen(*file) - 4, ".txt") != 0) {
-        printf("The file must have a \".txt\" extension. Please provide a valid file: ");
-        scanf("%s", *file);
-    }
-
-
-    *file = (char *)realloc(*file, (strlen(*file) + 1) * sizeof(char));
-    if (*file == NULL) {
-        printf("Memory reallocation failed.\n");
-        exit(EXIT_FAILURE);
-    }
-}
-
-
-FILE* openFile(const char* filename) {
-    char* dynamicFilename = (char *)malloc(100 * sizeof(char)); 
-    dynamicFilename = filename;
-    if (dynamicFilename == NULL) {
-        printf("Memory allocation failed.\n");
-        exit(EXIT_FAILURE);
-    }
-
-
-    while (access(dynamicFilename,F_OK)!=0) {
-        printf("File \"%s\" does not exist. Please provide another file:\n", dynamicFilename);
-        scanf("%s", dynamicFilename);
- 	  while (strcmp(dynamicFilename + strlen(dynamicFilename) - 4, ".txt") != 0) {
-        printf("The file must have a \".txt\" extension. Please provide a valid file: ");
-        scanf("%s", dynamicFilename);
-        }
-    }
-
-
-    dynamicFilename = realloc(dynamicFilename, (strlen(dynamicFilename) + 1) * sizeof(char));
-    if (dynamicFilename == NULL) {
-        printf("Memory reallocation failed.\n");
-        exit(EXIT_FAILURE);
-    }
-    FILE* file = fopen(dynamicFilename, "r");
-    return file;
-}
-
-void checkIfNotTheSame(char **in, char **out) {
-    if (strcmp(*in, *out) == 0) {
-        printf("The input files are the same.\n");
-        printf("%d. input\n",1);
-        printf("%d. output\n",2);
-        printf("Which string do you want to change? (Enter number: 1 or 2): ");
-        
-        int choice;
-        scanf("%d", &choice);
-        
-        if (choice == 1) {
-           *in=NULL;
-           checkFile("input",in);
-        } else if (choice == 2) {
-            *out=NULL;
-           checkFile("input",out);
-        } else {
-            printf("Invalid choice.\n");
-        }
-    }
+    FILE* f = fopen(filename, mode);
+    return f;
 }

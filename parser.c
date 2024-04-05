@@ -6,18 +6,12 @@ void readLineBit(FILE* in, char** outBuffer, USHORT* size) {
     *outBuffer = calloc(MAX_LINE_WIDTH/8, 1);
 
     //BUFFER MUST BE ALLOCATED
-    if(!(*outBuffer)) return;
+    if(!(*outBuffer)) R_ERROR("Couldnt allocate %d BYTES of memory!", MAX_LINE_WIDTH/8);
 
     //READ ONE LINE IN BITS
     while( (*size) < MAX_LINE_WIDTH && !feof(in) && ((currentChar = fgetc(in)) != '\n')) {
-        //printf("CURRENT CHAR: %c\n", currentChar);
-        
         (*outBuffer)[(*size)/8] <<= ((*size)%8)? 0x1 : 0x0;
         (*outBuffer)[(*size)/8] |= (currentChar==WALL_CHAR)? 0x1 : 0x0;
-
-        //printf("CURRENT BUFFER[%d]: ", (*size)/8);
-        //printf(BYTE_TO_BINARY_PATTERN, BYTE_TO_BINARY((*outBuffer)[(*size)/8]));
-        //printf("\n\n");
 
         (*size)++;
     }
@@ -32,51 +26,36 @@ void readLineBit(FILE* in, char** outBuffer, USHORT* size) {
     }    
 }
 
-void toGraph(FILE* out, FILE* adjMatrix, const char* buffers[3], const USHORT lineSize, const USHORT height) {
-    //TODO: Add horizontal connections to adjacency matrix
-    
-    //BITS: 0b(PREV LEFT)(PREV RIGHT)(PREV TOP)(PREV BOTTOM)(LEFT)(RIGHT)(TOP)(BOTTOM)    
-    UCHAR roadData = 0;
-    static UINT id = 0;
-    UINT nodeId = 0;
-    for(USHORT i = 0; i < lineSize; i++) {
+void toGraph(FILE* tempF, const char* buffers[3], const USHORT lineSize, const USHORT height) {    
+    node_t tempNode;
+    tempNode.y = height;
 
+    for(tempNode.x = 0; tempNode.x < lineSize; tempNode.x++) {
         //CHECK LEFT AND RIGHT ROAD
-        if(i != 0) {
-            roadData |= (1 - GET_BIT(buffers[1], i-1)) << 3;
+        if(tempNode.x != 0) {
+            tempNode.adj |= (1 - GET_BIT(buffers[1], tempNode.x-1)) << 3;
         }
 
-        if(i < lineSize-1) {
-            roadData |= (1 - GET_BIT(buffers[1], i+1)) << 2;
+        if(tempNode.x < lineSize-1) {
+            tempNode.adj |= (1 - GET_BIT(buffers[1], tempNode.x+1)) << 2;
         }
 
         //CHECK TOP AND BOTTOM ROAD
-        roadData |= (1 - GET_BIT(buffers[0], i)) << 1;
-        roadData |= 1 - GET_BIT(buffers[2], i);
+        tempNode.adj |= (1 - GET_BIT(buffers[0], tempNode.x)) << 1;
+        tempNode.adj |= 1 - GET_BIT(buffers[2], tempNode.x);
 
-        //STORE NODE (INTERSECTION / TURN) IN TEMP FILE
-        if((roadData&0b1100) > 0 && (roadData&0b11) > 0) {
-            fprintf(out, TEMP_NODE_FORMAT(id++, i, height, roadData&0b1111));
-            
-            if((roadData & 0b01000000) > 0 && (roadData & 0b00001000) > 0) {
-                fprintf(adjMatrix, "%d %d\n%d %d\n",id-2, id-1, id-1, id-2);
-            }
+        //STORE NODE IN TEMP FILE
+        fwrite(&tempNode, sizeof(tempNode), 1, tempF);
 
-            //SHIFT INTERSECTION TO PREV INTERSECTION
-            roadData <<= 4;
-        }
-
-    roadData &= 0b11110000;
+        tempNode.adj = 0;
     }
 }
 
 void parseFile(const char* filename) {
     FILE* in = NULL;
-    FILE* nodeFile = NULL;
-    FILE* matrixFile = NULL;
-    in = openFile( filename);
-    nodeFile=fopen( TEMP_NODE_FILENAME, "w");
-    matrixFile = fopen( TEMP_MATRIX_FILENAME, "w");
+    FILE* nodeOut = NULL;
+    in = openFile(filename, "r");
+    nodeOut = openFile(TEMP_NODE_FILENAME, "w");
 
     char* buffers[3];
     USHORT lineSize = 0;
@@ -94,7 +73,7 @@ void parseFile(const char* filename) {
 
     while(!feof(in)) {
         //FIND INTERSECTIONS / TURN
-        toGraph(nodeFile, matrixFile, buffers, lineSize, height);
+        toGraph(nodeOut, buffers, lineSize, height);
 
         //SHIFT BUFFERS
         free(buffers[0]);
@@ -113,4 +92,7 @@ void parseFile(const char* filename) {
     free(buffers[0]);
     free(buffers[1]);
     free(buffers[2]);
+    
+    fclose(in);
+    fclose(nodeOut);
 }

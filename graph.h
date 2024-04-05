@@ -1,8 +1,14 @@
 #pragma once
+
+#include <stdio.h>
+#include <stdlib.h>
+
 #include "macros.h"
 
-typedef struct Edge {
-    USHORT x : 10;
-    USHORT y : 10;
-    USHORT visited : 1;
-} edge_t;
+typedef struct Node {
+    USHORT x : 12;
+    USHORT y : 12;
+    UCHAR adj : 4;
+} node_t;
+
+node_t getNode(FILE* Nodes, USHORT x, USHORT y);
