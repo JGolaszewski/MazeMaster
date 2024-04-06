@@ -57,8 +57,7 @@ int main(int argc, char** argv) {
     R_VERBOSE("Parsing to graph...");
     parseFile(input_file);
     FILE* nodes = openFile(TEMP_NODE_FILENAME, "r");
-    getNode(nodes, 1, 1);
-    //getNode(nodes, 1, 1);
-    //printf("%c%c%c%c%c%c%c", nod[0], nod[1], nod[2], nod[3], nod[4], nod[5], nod[6]);
+    node_t n = getNode(nodes, 1, 2);
+    R_DEBUG("Node: x = %d, y = %d, adj = %d", n.x, n.y, n.adj);
     return 0;
 }

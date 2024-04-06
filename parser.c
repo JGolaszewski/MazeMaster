@@ -31,6 +31,7 @@ void toGraph(FILE* tempF, const char* buffers[3], const USHORT lineSize, const U
     tempNode.y = height;
 
     for(tempNode.x = 0; tempNode.x < lineSize; tempNode.x++) {
+        if(GET_BIT(buffers[1], tempNode.x) == 1) continue;
         //CHECK LEFT AND RIGHT ROAD
         if(tempNode.x != 0) {
             tempNode.adj |= (1 - GET_BIT(buffers[1], tempNode.x-1)) << 3;
