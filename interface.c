@@ -11,6 +11,34 @@ void print_help(char *program_name) {
     printf("  -q|- -quit \n");
 }
 
+void parse_args(int argc, char** argv, char** inFilename, char** outFilename) {
+    int opt = 0;
+    while ((opt = getopt(argc, argv, "i:o:vdhq")) != -1) {
+        switch (opt) {
+            case 'i':
+                *inFilename = optarg;
+                break;
+            case 'o':
+                *outFilename = optarg;
+                break;
+            case 'v':
+                verbose = 1;
+                break;
+            case 'd':
+                debug = 1;
+                break;
+            case 'h':
+                print_help(argv[0]);
+                exit(EXIT_SUCCESS);
+            case 'q':
+                printf("Exiting program...\n");
+                exit(EXIT_SUCCESS);
+            default:
+            
+        }
+    }
+}
+
 FILE* openFile(const char* filename, const char* mode) {
     int idMode = -1;
     USHORT it = 0;
