@@ -18,7 +18,6 @@ bfs(FILE* Nodes, USHORT currentx, USHORT currenty, USHORT endx, USHORT endy){
  	bool found=0;
  	node_t current= getNode (Nodes,currentx, currenty);
  	makeParent(Nodes, currentx, currenty, 0, 0);
- 	int itr =1; 
  	fprintf(queue ,"%d %d" , current.x ,current.y );	
  	
  	while(!found){
@@ -43,7 +42,7 @@ bfs(FILE* Nodes, USHORT currentx, USHORT currenty, USHORT endx, USHORT endy){
  		 	checkIfvisited(Nodes, current.x , current.y-1 , queue,current );
  		}
  		if(current.x==endx && current.x==endx){
-		found=1;
+			found=1;
 		}
 	
  		}
