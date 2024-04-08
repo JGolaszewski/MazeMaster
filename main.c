@@ -32,8 +32,14 @@ int main(int argc, char** argv) {
     R_VERBOSE("Parsing to graph...");
     
     parseFile(input_file);
-    FILE* nodes = openFile(TEMP_NODE_FILENAME, "r");
-    node_t n = getNode(nodes, 1, 2);
-    R_DEBUG("Node: x = %d, y = %d, adj = %d", n.x, n.y, n.adj);
+
+    //TESTOWO 
+    FILE* nodes = openFile(TEMP_NODE_FILENAME, "r+");
+    node_t n = getNode(nodes, 1, 1);
+    R_DEBUG("Node: x = %d, y = %d, adj = %d, flag = %d", n.x, n.y, n.adj, n.flag);
+    markNode(nodes, 1, 1);
+    n = getNode(nodes, 1, 1);
+    R_DEBUG("Node: x = %d, y = %d, adj = %d, flag = %d", n.x, n.y, n.adj, n.flag);
+
     return 0;
 }

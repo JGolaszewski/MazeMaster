@@ -29,6 +29,7 @@ void readLineBit(FILE* in, char** outBuffer, USHORT* size) {
 void toGraph(FILE* tempF, const char* buffers[3], const USHORT lineSize, const USHORT height) {    
     node_t tempNode;
     tempNode.y = height;
+    tempNode.flag = 0;
 
     for(tempNode.x = 0; tempNode.x < lineSize; tempNode.x++) {
         if(GET_BIT(buffers[1], tempNode.x) == 1) continue;
@@ -66,7 +67,9 @@ void parseFile(const char* filename) {
     //(BUFFER[1] => height)
     //(BUFFER[2] => height+1)
     USHORT height = 1;
-    
+
+    //TODO: CHECK IF FILE IS BINARY IF IT IS READ LINE W FREAD INSTEAD OF READLINEBIT
+
     //READ 3 FIRST LINES
     readLineBit(in, &buffers[0], &lineSize);
     readLineBit(in, &buffers[1], &lineSize);
@@ -85,9 +88,6 @@ void parseFile(const char* filename) {
         readLineBit(in, &buffers[2], &lineSize);
         height++;
     }
-
-    //TODO: Add vertical connections to adjacency matrix
-    //TODO: (Optional) smooth the graph by removing turns 
 
     //FREE BUFFERS MEM
     free(buffers[0]);
