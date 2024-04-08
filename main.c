@@ -40,6 +40,8 @@ int main(int argc, char** argv) {
     markNode(nodes, 1, 1);
     n = getNode(nodes, 1, 1);
     R_DEBUG("Node: x = %d, y = %d, adj = %d, flag = %d", n.x, n.y, n.adj, n.flag);
+   
+    bfs( nodes, 0,1, 10, 9);
 
     return 0;
 }
