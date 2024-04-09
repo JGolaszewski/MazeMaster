@@ -22,10 +22,10 @@ void bfs(FILE* Nodes, USHORT currentx, USHORT currenty, USHORT endx, USHORT endy
     
     bool found = false;
     node_t current = getNode(Nodes, currentx, currenty);
-    fprintf(queue, "%d %d", current.x, current.y);
+    fprintf(queue, "%d %d ", current.x, current.y);
 
     while (!found) {
-        if (fscanf(queue, "%d %d", &currentx, &currenty) != 2) {
+        if (fscanf(queue, "%d %d ", &currentx, &currenty) != 2) {
             R_ERROR("Failed to read coordinates, possibly end of file reached");
             break;
         }
