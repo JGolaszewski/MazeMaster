@@ -9,4 +9,4 @@
 
 void checkIfvisited(FILE* Nodes, USHORT x, USHORT y,FILE* queue ,node_t current);
 
-bfs(FILE* Nodes, USHORT currentx, USHORT currenty, USHORT endx, USHORT endy);
+void bfs(FILE* Nodes, USHORT currentx, USHORT currenty, USHORT endx, USHORT endy);
