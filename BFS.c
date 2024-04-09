@@ -3,9 +3,9 @@
 
 void checkIfvisited(FILE* Nodes, USHORT x, USHORT y,FILE* queue ,node_t current){
 	node_t temp = getNode (Nodes,x, y);
-	makeParent(Nodes, x, y, current.x, current.y);
 	if(temp.flag==0){
  		fprintf(queue ,"%d %d " , temp.x, temp.y );
+ 		makeParent(Nodes, x, y, current.x, current.y);
 
 	}
 }
@@ -17,7 +17,7 @@ bfs(FILE* Nodes, USHORT currentx, USHORT currenty, USHORT endx, USHORT endy){
  	queue = fopen("tempQueue.txt", "r+");
  	bool found=0;
  	node_t current= getNode (Nodes,currentx, currenty);
- 	makeParent(Nodes, currentx, currenty, 0, 0);
+ 	//makeParent(Nodes, currentx, currenty, 0, 0);
  	fprintf(queue ,"%d %d" , current.x ,current.y );	
  	
  	while(!found){
@@ -47,6 +47,7 @@ bfs(FILE* Nodes, USHORT currentx, USHORT currenty, USHORT endx, USHORT endy){
 	
  		}
  	}
+ 	fclose(queue);
  	free(queue);
 
 }
