@@ -3,7 +3,7 @@
 void readLineBit(FILE* in, char** outBuffer, USHORT* size) {
     char currentChar = '\0';
     *size = 0;
-    *outBuffer = calloc(MAX_LINE_WIDTH/8, 1);
+    *outBuffer = calloc(MAX_LINE_WIDTH/8 + 1, 1);
 
     //BUFFER MUST BE ALLOCATED
     if(!(*outBuffer)) R_ERROR("Couldnt allocate %d BYTES of memory!", MAX_LINE_WIDTH/8);
