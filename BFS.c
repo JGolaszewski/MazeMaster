@@ -5,53 +5,79 @@ void checkIfvisited(FILE* Nodes, USHORT x, USHORT y,FILE* queue ,node_t current)
 	node_t temp = getNode (Nodes,x, y);
 	if(temp.flag==0){
  		fprintf(queue ,"%d %d " , temp.x, temp.y );
- 		makeParent(Nodes, x, y, current.x, current.y);
+ 		//makeParent(Nodes, x, y, current.x, current.y);
 
 	}
 }
 
 
 void bfs(FILE* Nodes, USHORT currentx, USHORT currenty, USHORT endx, USHORT endy) {
-    FILE* queue;
-    queue = fopen("tempQueue.txt", "r+");
-    if (queue == NULL) {
-        R_ERROR("Error opening file");
-        
-        return;
-    }
-    
-    bool found = false;
-    node_t current = getNode(Nodes, currentx, currenty);
-    fprintf(queue, "%d %d ", current.x, current.y);
+    queue_t queue = create_q();
+    node_t cur_node = getNode(Nodes, currentx, currenty);
+    node_t nextNode;
+    cur_node.flag = 1;
+    setNode(Nodes, cur_node);
 
-    while (!found) {
-        if (fscanf(queue, "%d %d ", &currentx, &currenty) != 2) {
-            R_ERROR("Failed to read coordinates, possibly end of file reached");
-            break;
+    nextNode.x = cur_node.x;
+    nextNode.y = cur_node.y;
+    nextNode.adj = cur_node.adj;
+    nextNode.flag = 1;
+    nextNode.parent = cur_node.parent;
+
+
+    push_q(&queue, cur_node);
+    do {
+        R_DEBUG("Current node: %d %d", cur_node.x, cur_node.y);
+
+        if(N_ADJ_LEFT(cur_node)) {
+            R_DEBUG("LEFT");
+            nextNode = getNode(Nodes, cur_node.x - 1, cur_node.y);
+            if(nextNode.flag == 0) {
+                R_DEBUG("VALID");
+                nextNode.parent = RIGHT;
+                setNode(Nodes, nextNode);
+                push_q(&queue, nextNode);
+            }
         }
 
-        current = getNode(Nodes, currentx, currenty);
+        if(N_ADJ_RIGHT(cur_node)) {
+            nextNode = getNode(Nodes, cur_node.x + 1, cur_node.y);
+                R_DEBUG("RIGHT");
 
-        if (current.flag == 0) {
-            markNode(Nodes, currentx, currenty);
-            if (N_ADJ_RIGHT(current)) {
-                checkIfvisited(Nodes, current.x + 1, current.y, queue, current);
-            }
-            if (N_ADJ_LEFT(current)) {
-                checkIfvisited(Nodes, current.x - 1, current.y, queue, current);
-            }
-            if (N_ADJ_TOP(current)) {
-                checkIfvisited(Nodes, current.x, current.y + 1, queue, current);
-            }
-            if (N_ADJ_BOTTOM(current)) {
-                checkIfvisited(Nodes, current.x, current.y - 1, queue, current);
-            }
-            if (current.x == endx && current.y == endy) {
-                found = true;
+            if(nextNode.flag == 0) {
+                R_DEBUG("VALID");
+                nextNode.parent = LEFT;
+                setNode(Nodes, nextNode);
+                push_q(&queue, nextNode);
             }
         }
-    }
-    
-    fclose(queue);
+
+        if(N_ADJ_TOP(cur_node)) {
+            nextNode = getNode(Nodes, cur_node.x, cur_node.y - 1);
+                R_DEBUG("TOP");
+
+            if(nextNode.flag == 0) {
+                R_DEBUG("VALID");
+                nextNode.parent = BOTTOM;
+                setNode(Nodes, nextNode);
+                push_q(&queue, nextNode);
+            }
+        }
+
+        if(N_ADJ_BOTTOM(cur_node)) {
+            nextNode = getNode(Nodes, cur_node.x, cur_node.y + 1);
+                R_DEBUG("BOTTOM");
+
+            if(nextNode.flag == 0) {
+                R_DEBUG("VALID");
+                nextNode.parent = TOP;
+                setNode(Nodes, nextNode);
+                push_q(&queue, nextNode);
+            }
+        }
+        //sleep(1);
+        cur_node = pop_q(&queue);
+    } while(!queue.isEmpty && !(cur_node.x == endx && cur_node.y == endy));
+    delete_q(&queue);
 }
 

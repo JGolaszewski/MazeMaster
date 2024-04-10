@@ -6,6 +6,8 @@
 #include "macros.h"
 #include "reports.h"
 #include "graph.h"
+#include "interface.h"
+#include "queue.h"
 
 void checkIfvisited(FILE* Nodes, USHORT x, USHORT y,FILE* queue ,node_t current);
 

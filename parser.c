@@ -28,8 +28,11 @@ void readLineBit(FILE* in, char** outBuffer, USHORT* size) {
 
 void toGraph(FILE* tempF, const char* buffers[3], const USHORT lineSize, const USHORT height) {    
     node_t tempNode;
+    tempNode.x = 0;
     tempNode.y = height;
+    tempNode.adj = 0;
     tempNode.flag = 0;
+    tempNode.parent = 0;
 
     for(tempNode.x = 0; tempNode.x < lineSize; tempNode.x++) {
         if(GET_BIT(buffers[1], tempNode.x) == 1) continue;

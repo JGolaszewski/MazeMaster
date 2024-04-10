@@ -11,6 +11,7 @@
 
 //NAME MAKRO
 #define TEMP_NODE_FILENAME "./temp/tempNodes.txt"
+#define QUEUE_FILENAME "./temp/queue.txt"
 
 //BIT OPERATIONS MAKRO
 #define GET_BIT(byteArr, n) \

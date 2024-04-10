@@ -7,6 +7,8 @@
 #include "interface.h"
 #include "reports.h"
 
+#include "queue.h"
+
 UCHAR verbose = 0;
 UCHAR debug = 0;
 
@@ -35,13 +37,7 @@ int main(int argc, char** argv) {
 
     //TESTOWO 
     FILE* nodes = openFile(TEMP_NODE_FILENAME, "r+");
-    node_t n = getNode(nodes, 1, 1);
-    R_DEBUG("Node: x = %d, y = %d, adj = %d, flag = %d", n.x, n.y, n.adj, n.flag);
-    markNode(nodes, 1, 1);
-    n = getNode(nodes, 1, 1);
-    R_DEBUG("Node: x = %d, y = %d, adj = %d, flag = %d", n.x, n.y, n.adj, n.flag);
-   
-    bfs( nodes, 0,1, 10, 9);
 
+    bfs( nodes, 0, 1, 300, 47);
     return 0;
 }
