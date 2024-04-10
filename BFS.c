@@ -10,7 +10,7 @@ void bfs(FILE* Nodes, USHORT currentx, USHORT currenty, USHORT endx, USHORT endy
 
     push_q(&queue, cur_node);
     
-    while(!queue.isEmpty ) {
+    while(!queue.isEmpty) {
         cur_node = pop_q(&queue);
         R_DEBUG("Current node: %d %d", cur_node.x, cur_node.y);
          if(cur_node.x == endx && cur_node.y == endy)
