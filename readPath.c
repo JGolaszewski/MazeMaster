@@ -1,7 +1,7 @@
 #include "readPath.h"
 
 void readPath(FILE* Nodes, node_t startNode, USHORT endx, USHORT endy) {
-    while (startNode.x!=endx && startNode.x!=endy) {
+    while (startNode.x!=endx || startNode.y!=endy) {
       
         printf("%d ", startNode.parent);
         
@@ -18,7 +18,7 @@ void readPath(FILE* Nodes, node_t startNode, USHORT endx, USHORT endy) {
             startNode = getNode(Nodes, startNode.x, startNode.y + 1);
         }
  	R_VERBOSE("Going into: %d %d", startNode.x, startNode.y);
- 	
+ 	//if(startNode.x==endx && startNode.y==endy)break;
     }
 }
 
