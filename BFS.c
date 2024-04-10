@@ -7,11 +7,14 @@ void bfs(FILE* Nodes, USHORT currentx, USHORT currenty, USHORT endx, USHORT endy
     node_t cur_node = getNode(Nodes, currentx, currenty);
     node_t nextNode;
     setNode(Nodes, cur_node);
+
     push_q(&queue, cur_node);
     
-    while(!queue.isEmpty && !(cur_node.x == endx && cur_node.y == endy)) {
+    while(!queue.isEmpty ) {
         cur_node = pop_q(&queue);
         R_DEBUG("Current node: %d %d", cur_node.x, cur_node.y);
+         if(cur_node.x == endx && cur_node.y == endy)
+       	break;
 	if(cur_node.flag==0){
 	cur_node.flag=1;
 	setNode(Nodes, cur_node);
@@ -68,8 +71,6 @@ void bfs(FILE* Nodes, USHORT currentx, USHORT currenty, USHORT endx, USHORT endy
 		}
         }
     } 
-    cur_node.parrent=NULL;
-    setNode(Nodes, cur_node);
     delete_q(&queue);
 }
 

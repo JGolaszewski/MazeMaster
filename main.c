@@ -39,6 +39,6 @@ int main(int argc, char** argv) {
     FILE* nodes = openFile(TEMP_NODE_FILENAME, "r+");
 
     bfs( nodes, 9, 8, 0, 1);
-    readPath(nodes,getNode(nodes,0,1);
+    readPath(nodes,getNode(nodes,0,1),9,8);
     return 0;
 }
