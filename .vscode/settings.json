@@ -2,6 +2,7 @@
     "files.associations": {
         "xiosbase": "c",
         "xlocale": "c",
-        "xutility": "c"
+        "xutility": "c",
+        "parser.h": "c"
     }
 }

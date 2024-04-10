@@ -15,7 +15,7 @@
 
 //BIT OPERATIONS MAKRO
 #define GET_BIT(byteArr, n) \
-  (((byteArr)[(n)/8]>>(7-((n)%8)))&0x01)
+  (((byteArr)[(n)/8]>>(7-((n)%8)))&0b1)
 
 #define BYTE_TO_BINARY_PATTERN "%c%c%c%c%c%c%c%c"
 #define BYTE_TO_BINARY(byte)  \

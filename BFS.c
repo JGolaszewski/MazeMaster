@@ -26,7 +26,7 @@ void bfs(FILE* Nodes, USHORT currentx, USHORT currenty, USHORT endx, USHORT endy
 		        nextNode.parent = RIGHT;
 		        setNode(Nodes, nextNode);
 		        push_q(&queue, nextNode);
-		       R_VERBOSE("Added to queue: %d %d", nextNode.x, nextNode.y);
+		       	R_VERBOSE("Added to queue: %d %d", nextNode.x, nextNode.y);
 		    }
 		}
 

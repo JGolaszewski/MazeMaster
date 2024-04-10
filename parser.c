@@ -12,18 +12,18 @@ void readLineBit(FILE* in, char** outBuffer, USHORT* size) {
     while( (*size) < MAX_LINE_WIDTH && !feof(in) && ((currentChar = fgetc(in)) != '\n')) {
         (*outBuffer)[(*size)/8] <<= ((*size)%8)? 0x1 : 0x0;
         (*outBuffer)[(*size)/8] |= (currentChar==WALL_CHAR)? 0x1 : 0x0;
-
         (*size)++;
     }
+    (*size)--;
+
 
     //SHIFT ALL LOADED BITS TO LEFT IN LAST BYTE
-    (*outBuffer)[(*size)/8] <<= 8 - (*size)%8;
+    (*outBuffer)[(*size)/8] <<= 7 - (*size)%8;
     
-    //REALLOC MEM BUFFER TO FIT
-    if((*size) < MAX_LINE_WIDTH) {
-        char* temp = realloc((*outBuffer), (*size)/8 + (((*size)%8 != 0)? 1 : 0));
-        if(temp) (*outBuffer) = temp;
-    }    
+    for(USHORT i = 0; i < (*size); i++) {
+        fprintf(ftemp, "%d", GET_BIT(*outBuffer, i));
+    }
+    fprintf(ftemp, "\n");
 }
 
 void toGraph(FILE* tempF, const char* buffers[3], const USHORT lineSize, const USHORT height) {    
@@ -57,6 +57,9 @@ void toGraph(FILE* tempF, const char* buffers[3], const USHORT lineSize, const U
 }
 
 void parseFile(const char* filename) {
+    ftemp = fopen("./temp/test.txt", "w");
+    fclose(ftemp);
+    ftemp = fopen("./temp/test.txt", "a+");
     FILE* in = NULL;
     FILE* nodeOut = NULL;
     in = openFile(filename, "r");
@@ -90,6 +93,7 @@ void parseFile(const char* filename) {
         //READ NEXT LINE
         readLineBit(in, &buffers[2], &lineSize);
         height++;
+        R_DEBUG("%d", height);
     }
 
     //FREE BUFFERS MEM
@@ -99,4 +103,6 @@ void parseFile(const char* filename) {
     
     fclose(in);
     fclose(nodeOut);
+
+    fclose(ftemp);
 }
