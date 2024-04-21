@@ -6,6 +6,8 @@
 ]{article}
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
+\usepackage{listings}
+\usepackage{graphicx}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
@@ -33,6 +35,7 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
+
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
@@ -47,9 +50,40 @@
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
+  
+  \definecolor{codegreen}{rgb}{0,0.6,0}
+  \definecolor{codegray}{rgb}{0.5,0.5,0.5}
+  \definecolor{codepurple}{rgb}{0.58,0,0.82}
+  \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+  
+  \lstdefinestyle{mystyle}{
+      backgroundcolor=\color{backcolour},   
+      commentstyle=\color{codegreen},
+      keywordstyle=\color{magenta},
+      numberstyle=\tiny\color{codegray},
+      stringstyle=\color{codepurple},
+      basicstyle=\ttfamily\footnotesize,
+      breakatwhitespace=false,         
+      breaklines=true,                 
+      captionpos=b,                    
+      keepspaces=true,                 
+      numbers=left,                    
+      numbersep=5pt,                  
+      showspaces=false,                
+      showstringspaces=false,
+      showtabs=false,                  
+      tabsize=2
+  }
+  
+  \lstset{style=mystyle}
+
+  \graphicspath{ {./ } }
+
+
 \title {Maze Master \\[1ex] \large Dokumentacja implementacyjna \\[1ex] https://github.com/JGolaszewski/MazeMaster}
 \date{\today}
 \author{Jędrzej Gołaszewski i Szymon Stasiak}
+
 
 \begin{document}
 \pagenumbering{gobble}  
@@ -66,9 +100,7 @@ najkrótszej ścieżki przez labirynt, który został stworzony na podstawie
 pliku wygenerowanego na stronie http://tob.iem.pw.edu.pl/maze/. Program
 wygeneruje precyzyjny ciąg instrukcji, który prowadzi od punktu
 początkowego do punktu wyjściowego. Dzięki niemu użytkownik może
-sprawnie i efektywnie odnaleźć właściwą drogę. Jednocześnie, stanowi on
-fundament dla następnego programu który będzie wizualizował labirynt i
-zaznaczał na nim ścieżkę.
+sprawnie i efektywnie odnaleźć właściwą drogę.
 
 \hypertarget{uux17cytkowanie}{%
 \section{Użytkowanie}\label{uux17cytkowanie}}
@@ -233,6 +265,9 @@ końcu a `P' - odpowiada początkowi.
 
 Przykładowy plik labiryntu:
 
+\includegraphics[width=5cm, height=5cm]{plik.png}
+
+
 \hypertarget{pliki-programu}{%
 \paragraph{Pliki programu:}\label{pliki-programu}}
 
@@ -249,15 +284,14 @@ Main łączy moduły programu w spójną całość.
 \end{itemize}
 
 Zawiera implementację struktury wierzchołków oraz funkcje służące do
-odczytu ich z tymczasowego node\_temp //Odnośnik do plikow
-tymczasowych//
+odczytu ich z \hyperref[pliki-tymczasowe] {tymczasowego node\_temp}
 
 \begin{itemize}
 \item
   BFS.c, BFS.h, readPath.c oraz readPath.h
 \end{itemize}
 
-Zawiera implementację modułu BFS //Odnośnik do modułu// wraz z
+Zawiera implementację  \hyperref[bfs]{modułu BFS} wraz z
 odczytywaniem rozwiązania.
 
 \begin{itemize}
@@ -265,24 +299,22 @@ odczytywaniem rozwiązania.
   interface.c, interface.h oraz reports.h
 \end{itemize}
 
-Zawiera implementację modułu komunikacji z użytkownikiem //Odnośnik do
-modułu// oraz makra do zgłaszania błędów.
+Zawiera implementację modułu komunikacji z użytkownikiem 
+oraz \hyperref[moux17cliwe-bux142ux119dy]{makra do zgłaszania błędów}.
 
 \begin{itemize}
 \item
   parser.c oraz parser.h
 \end{itemize}
 
-Zawiera implementację modułu //Odnośnik do modułu// parsera który
+Zawiera implementację \hyperref[parser]{modułu parsera}który
 zamienia plik labiryntu na grafowy jego odpowiednik.
 
 \begin{itemize}
 \item
   Macros.h
 \end{itemize}
-
-Zawiera makra stałych w programie i funkcje pomocnicze. //Odnośnik do
-akapitu o stałych i funkcjach pom//
+\hyperref[staux142e-programu-i-funkcje-pomocnicze]{Zawiera makra stałych w programie i funkcje pomocnicze.} 
 
 \hypertarget{struktury-programu}{%
 \subsubsection{Struktury programu}\label{struktury-programu}}
@@ -303,7 +335,24 @@ bit przejście w górę, 4 bit przejście w dół).
 
 Implementacja struktury wygląda następująco:
 
-//kod
+\begin{lstlisting}[language=C, caption=Struktura Node]
+  enum Direction {
+    LEFT = 0b00,
+    RIGHT = 0b01,
+    TOP = 0b10,
+    BOTTOM = 0b11
+};
+
+typedef struct Node {
+    USHORT x : 12;
+    USHORT y : 12;
+    //ADJ - adjacency of node BITS: (LEFT)(RIGHT)(TOP)(BOTTOM)
+    UCHAR adj : 4;
+    // 00 - LEFT   01 RIGHT  10 - TOP  11 - BOTTOM
+    UCHAR parent : 2;
+    UCHAR flag : 1;
+} node_t;
+\end{lstlisting}
 
 \begin{itemize}
 \item
@@ -316,7 +365,12 @@ utrzymujący informację o tym czy kolejka jest aktualnie pusta.
 
 Implementacja struktury wygląda następująco:
 
-//kod
+\begin{lstlisting}[language=C, caption=Struktura Queue]
+  typedef struct Queue {
+    FILE* queueData;
+    UCHAR isEmpty : 1;
+} queue_t;
+\end{lstlisting}
 
 \hypertarget{zaux142oux17cenia-i-rozwiux105zania-systemu}{%
 \section{Założenia i rozwiązania
@@ -326,8 +380,7 @@ systemu}\label{zaux142oux17cenia-i-rozwiux105zania-systemu}}
 \subsubsection{\texorpdfstring{Przygotowanie danych do algorytmu
 }{Przygotowanie danych do algorytmu }}\label{przygotowanie-danych-do-algorytmu}}
 
-Dane z pliku txt //Odnośnik do pliku tekstowego wejscia// i binarnego
-//Odnosnik do pliku wejsciowego bin// zawierające opis labiryntu są
+Dane z \hyperref[pliki-wejux15bciowe]{pliku txt}  zawierające opis labiryntu są
 przetwarzane na formę grafu. Każde pole jest przetwarzane na osobny
 wierzchołek i przechowywane na siatce o rozmiarach x*y gdzie x to ilość
 kolumn labiryntu a y ilość wierszy. Każdy element nawet pole ze ściana
@@ -336,8 +389,7 @@ ma swój wierzchołek jednak pola ściany są pojedynczymi wierzchołkami bez
 Pola puste labiryntu te po których możemy chodzić posiadają opis w
 formie bitowej opisujących ich sąsiadów to znaczy możemy się z tego
 dowiedzieć w którym kierunku możemy pójść dalej do góry do dołu w prawo
-czy na lewo. Opis ten jest tworzony podczas parsowania //Odnośnik do
-parsowania//.
+czy na lewo. Opis ten jest tworzony podczas \hyperref[parser]{parsowania}.
 
 \hypertarget{uux17cyty-algorytm}{%
 \subsubsection{Użyty algorytm}\label{uux17cyty-algorytm}}
@@ -376,16 +428,15 @@ przez labirynt.
 Metoda parsowania opiera się na zapisaniu wczytanych danych w sposób
 binarny jako poszczególne kolejne trzy wiersze z pliku następnie
 zidentyfikowanie połączeń pomiędzy pustymi polami i zapisanie ich
-zgodnie z formatem pliku temp\_nodes //Odnośnik do plikow
-tymczasowych//.
+zgodnie z formatem pliku  \hyperref[pliki-tymczasowe] { temp\_nodes}.
 
-Zamiana binarna odbywa się poprzez zamianę poszczególnych znaków w pliku
-wejściowym // Odnośnik pliki wejściowe// na ich bitowe reprezentacje (0
+Zamiana binarna odbywa się poprzez zamianę poszczególnych znaków w \hyperref[pliki-wejux15bciowe]{pliku
+wejściowym} na ich bitowe reprezentacje (0
 -- wolna przestrzeń, 1 - ściana). Po wczytaniu 3 pierwszych wierszy
 program przystępuje do zamiany ich w bardziej czytelną formę krawędzi
 grafu. Jeżeli znak jest 0 sprawdza on połączenia we wszystkie 4 kierunki
-następnie zapisuje je do pliku tymczasowego temp\_nodes //Odnośnik do
-plików tymczasowych// wraz z przestrzenia na zapis flagi odwiedzenia
+następnie zapisuje je do pliku tymczasowego \hyperref[pliki-tymczasowe] { temp\_nodes}
+ wraz z przestrzenia na zapis flagi odwiedzenia
 oraz kierunku rodzica. Następnie program zwalnia pamięć pierwszego
 wiersza i wczytuje kolejny powtarzając proces aż do wyczerpania wierszy
 w pliku.
@@ -421,11 +472,11 @@ kierunek w którym jest rodzic wierzchołka).
 W pliku dane zapisywane są w sposób binarny po kolei od lewej do prawej,
 z góry na dół. Każda ściana z pliku jest odzwierciedlona jako pusta
 przestrzeń o rozmiarze wierzchołka a każda ścieżka jest przedstawiona
-jako odpowiednie dane wierzchołka //patrz zastosowanie//. Takie
+jako odpowiednie dane wierzchołka. Takie
 rozwiązanie pozwala na natychmiastowe odczytanie danych wierzchołka o
 pozycji x y bez przeszukiwania pliku. Zarówno puste jaki pełne ściany są
 odzwierciedlone w pliku jako N bitów (gdzie N jest ilością bitów które
-zajmuje struktura wierzchołka//Odnośnik do struktury node//)
+zajmuje \hyperref[struktury-programu]{struktura wierzchołka}
 \end{quote}
 
 \begin{itemize}
@@ -449,8 +500,8 @@ Przetrzymuje danych kolejki w pamięci pliku.
 
 \begin{quote}
 W pliku dane zapisywane są w sposób binarny, Każde kolejne N bitów
-(gdzie N jest ilością bitów które zajmuje struktura
-wierzchołka//Odnośnik do struktury node//) przetrzymuje dane kolejnych
+(gdzie N jest ilością bitów które zajmuje \hyperref[struktury-programu]{struktura
+wierzchołka}) przetrzymuje dane kolejnych
 wierzchołków w kolejce. Dzięki temu że plik jest otwierany w trybie
 append+ możliwa jest optymalizacja pamięciowa nie zapisywania początku i
 końca danych kolejki, gdyż append automatycznie przechodzi na koniec
@@ -485,8 +536,8 @@ w tablicy bajtów jako poszczególne bity.
 \end{itemize}
 
 Funkcja toGraph otrzymuje 3 kolejne linie zapisane binarnie analizując
-środkową z nich i zapisując ją do pliku tymczasowego temp\_nodes
-//odnośnik// w co wchodzą połączenia pomiędzy pustymi polami oraz puste
+środkową z nich i zapisując ją do pliku tymczasowego hyperref[pliki-tymczasowe]{ temp\_nodes}
+w co wchodzą połączenia pomiędzy pustymi polami oraz puste
 flagi dla algorytmu oraz puste przestrzenie pamięci o rozmiarze takim
 samym jak dane wierzchołka dla każdej ściany.
 
@@ -578,8 +629,6 @@ pobranie i przeanalizowanie argumentów wywołania programu.
 
 Funkcja print\_help w przypadku podania przez użytkownika argumentu -h
 lub --help wyświetla pomoc
-
-// Zdjecie pomocy wyświetlonej
 
 Trzecią funkcja występująca w tym module jest funkcja openFile która
 odpowiada za sprawdzenie czy podany przez użytkownika plik istnieje i

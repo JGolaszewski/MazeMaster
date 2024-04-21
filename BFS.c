@@ -1,76 +1,71 @@
 #include "BFS.h"
 
 
-void bfs(FILE* Nodes, USHORT currentx, USHORT currenty, USHORT endx, USHORT endy) {
+int bfs(FILE* Nodes, USHORT currentx, USHORT currenty, USHORT endx, USHORT endy) {
     
     queue_t queue = create_q();
     node_t cur_node = getNode(Nodes, currentx, currenty);
     node_t nextNode;
-    setNode(Nodes, cur_node);
-
     push_q(&queue, cur_node);
     
     while(!queue.isEmpty) {
         cur_node = pop_q(&queue);
-        R_DEBUG("Current node: %d %d", cur_node.x, cur_node.y);
-         if(cur_node.x == endx && cur_node.y == endy)
-       	break;
-	if(cur_node.flag==0){
-	cur_node.flag=1;
-	setNode(Nodes, cur_node);
+        R_DEBUG("Current node: %d %d %d", cur_node.x, cur_node.y, cur_node.data.adj);
+		
+        if(cur_node.x == endx && cur_node.y == endy) {
+			delete_q(&queue);
+			return 0;
+		}
+
 		if(N_ADJ_LEFT(cur_node)) {
-		    R_DEBUG("LEFT");
 		    nextNode = getNode(Nodes, cur_node.x - 1, cur_node.y);
-		    if(nextNode.flag == 0) {
-		        R_DEBUG("NOT_VISITED");
-		        nextNode.parent = RIGHT;
+		    if(nextNode.data.flag == 0) {
+		        nextNode.data.parent = RIGHT;
+				nextNode.data.flag = 1;
 		        setNode(Nodes, nextNode);
+				N_DELETE_CONNECTION(nextNode, RIGHT);
 		        push_q(&queue, nextNode);
-		       	R_VERBOSE("Added to queue: %d %d", nextNode.x, nextNode.y);
 		    }
 		}
 
 		if(N_ADJ_RIGHT(cur_node)) {
 		    nextNode = getNode(Nodes, cur_node.x + 1, cur_node.y);
-		        R_DEBUG("RIGHT");
 
-		    if(nextNode.flag == 0) {
-		        R_DEBUG("NOT_VISITED");
-		        nextNode.parent = LEFT;
+		    if(nextNode.data.flag == 0) {
+		        nextNode.data.parent = LEFT;
+				nextNode.data.flag = 1;
 		        setNode(Nodes, nextNode);
+				N_DELETE_CONNECTION(nextNode, LEFT);
 		        push_q(&queue, nextNode);
-		        R_VERBOSE("Added to queue: %d %d", nextNode.x, nextNode.y);
 		    }
 		}
 
 		if(N_ADJ_TOP(cur_node)) {
 		    nextNode = getNode(Nodes, cur_node.x, cur_node.y - 1);
-		        R_DEBUG("TOP");
 
-		    if(nextNode.flag == 0) {
-		        R_DEBUG("NOT_VISITED");
-		        nextNode.parent = BOTTOM;
+		    if(nextNode.data.flag == 0) {
+		        nextNode.data.parent = BOTTOM;
+				nextNode.data.flag = 1;
 		        setNode(Nodes, nextNode);
+				N_DELETE_CONNECTION(nextNode, BOTTOM);
 		        push_q(&queue, nextNode);
-		        R_VERBOSE("Added to queue: %d %d", nextNode.x, nextNode.y);
 		    }
 		}
 
 		if(N_ADJ_BOTTOM(cur_node)) {
 		    nextNode = getNode(Nodes, cur_node.x, cur_node.y + 1);
-		        R_DEBUG("BOTTOM");
 
-		    if(nextNode.flag == 0) {
-		        R_DEBUG("NOT_VISITED");
-		        nextNode.parent = TOP;
+		    if(nextNode.data.flag == 0) {
+		        nextNode.data.parent = TOP;
+				nextNode.data.flag = 1;
 		        setNode(Nodes, nextNode);
+				N_DELETE_CONNECTION(nextNode, TOP);
 		        push_q(&queue, nextNode);
-		        R_VERBOSE("Added to queue: %d %d", nextNode.x, nextNode.y);
 		    }
 		    
 		}
-        }
     } 
     delete_q(&queue);
+	return 1;
 }
 

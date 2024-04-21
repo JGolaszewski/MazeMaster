@@ -6,6 +6,7 @@
 #include "parser.h"
 #include "interface.h"
 #include "reports.h"
+#include "BFS.h"
 
 #include "queue.h"
 
@@ -35,10 +36,11 @@ int main(int argc, char** argv) {
     
     parseFile(input_file);
 
-    //TESTOWO 
     FILE* nodes = openFile(TEMP_NODE_FILENAME, "r+");
 
-    bfs(nodes, 1024, 511, 0, 1);
-    readPath(nodes, getNode(nodes,0,1) ,1024,511);
+    if(bfs(nodes, endX, endY, startX, startY)) {
+        R_WARNING("Labirynt nie ma wyjscia!");
+    }
+    //readPath(nodes, getNode(nodes,startX,startY) ,endX,endY);
     return 0;
 }

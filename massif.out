@@ -1,0 +1,447 @@
+desc: --massif-out-file=massif.out
+cmd: ./bin/bin.exe -i maze2.txt
+time_unit: i
+#-----------
+snapshot=0
+#-----------
+time=0
+mem_heap_B=0
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=1
+#-----------
+time=131622
+mem_heap_B=472
+mem_heap_extra_B=16
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=2
+#-----------
+time=132089
+mem_heap_B=944
+mem_heap_extra_B=32
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=3
+#-----------
+time=133219
+mem_heap_B=1201
+mem_heap_extra_B=55
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=4
+#-----------
+time=134746
+mem_heap_B=5297
+mem_heap_extra_B=63
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=5
+#-----------
+time=136981
+mem_heap_B=5554
+mem_heap_extra_B=86
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=6
+#-----------
+time=139122
+mem_heap_B=5811
+mem_heap_extra_B=109
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=7
+#-----------
+time=142107
+mem_heap_B=9907
+mem_heap_extra_B=117
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=8
+#-----------
+time=149950
+mem_heap_B=9907
+mem_heap_extra_B=117
+mem_stacks_B=0
+heap_tree=peak
+n3: 9907 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 8192 0x48C548B: _IO_file_doallocate (filedoalloc.c:101)
+  n1: 8192 0x48D40BF: _IO_doallocbuf (genops.c:347)
+   n2: 8192 0x48D40BF: _IO_doallocbuf (genops.c:342)
+    n1: 4096 0x48D2E7B: _IO_file_underflow@@GLIBC_2.2.5 (fileops.c:485)
+     n1: 4096 0x48D4171: _IO_default_uflow (genops.c:362)
+      n1: 4096 0x109866: readLineBit (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+       n1: 4096 0x109C91: parseFile (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+        n0: 4096 0x10952F: main (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+    n1: 4096 0x48D3157: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:744)
+     n1: 4096 0x48D229D: _IO_new_file_xsputn (fileops.c:1243)
+      n1: 4096 0x48D229D: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1196)
+       n1: 4096 0x48C6A64: fwrite (iofwrite.c:39)
+        n1: 4096 0x109CF3: parseFile (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+         n0: 4096 0x10952F: main (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+ n1: 944 0x48C5F7A: __fopen_internal (iofopen.c:65)
+  n2: 944 0x10A080: openFile (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+   n1: 472 0x109C1A: parseFile (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+    n0: 472 0x10952F: main (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+   n1: 472 0x109C37: parseFile (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+    n0: 472 0x10952F: main (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+ n3: 771 0x109618: readLineBit (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+  n1: 257 0x109C91: parseFile (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+   n0: 257 0x10952F: main (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+  n1: 257 0x109CAF: parseFile (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+   n0: 257 0x10952F: main (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+  n1: 257 0x109CCD: parseFile (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+   n0: 257 0x10952F: main (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+#-----------
+snapshot=9
+#-----------
+time=149950
+mem_heap_B=9650
+mem_heap_extra_B=94
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=10
+#-----------
+time=150019
+mem_heap_B=9907
+mem_heap_extra_B=117
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=11
+#-----------
+time=159073
+mem_heap_B=9650
+mem_heap_extra_B=94
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=12
+#-----------
+time=159142
+mem_heap_B=9907
+mem_heap_extra_B=117
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=13
+#-----------
+time=168197
+mem_heap_B=9650
+mem_heap_extra_B=94
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=14
+#-----------
+time=168266
+mem_heap_B=9907
+mem_heap_extra_B=117
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=15
+#-----------
+time=177313
+mem_heap_B=9650
+mem_heap_extra_B=94
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=16
+#-----------
+time=177382
+mem_heap_B=9907
+mem_heap_extra_B=117
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=17
+#-----------
+time=186440
+mem_heap_B=9650
+mem_heap_extra_B=94
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=18
+#-----------
+time=186509
+mem_heap_B=9907
+mem_heap_extra_B=117
+mem_stacks_B=0
+heap_tree=detailed
+n3: 9907 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 8192 0x48C548B: _IO_file_doallocate (filedoalloc.c:101)
+  n1: 8192 0x48D40BF: _IO_doallocbuf (genops.c:347)
+   n2: 8192 0x48D40BF: _IO_doallocbuf (genops.c:342)
+    n1: 4096 0x48D2E7B: _IO_file_underflow@@GLIBC_2.2.5 (fileops.c:485)
+     n1: 4096 0x48D4171: _IO_default_uflow (genops.c:362)
+      n1: 4096 0x109866: readLineBit (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+       n1: 4096 0x109C91: parseFile (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+        n0: 4096 0x10952F: main (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+    n1: 4096 0x48D3157: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:744)
+     n1: 4096 0x48D229D: _IO_new_file_xsputn (fileops.c:1243)
+      n1: 4096 0x48D229D: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1196)
+       n1: 4096 0x48C6A64: fwrite (iofwrite.c:39)
+        n1: 4096 0x109CF3: parseFile (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+         n0: 4096 0x10952F: main (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+ n1: 944 0x48C5F7A: __fopen_internal (iofopen.c:65)
+  n2: 944 0x10A080: openFile (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+   n1: 472 0x109C1A: parseFile (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+    n0: 472 0x10952F: main (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+   n1: 472 0x109C37: parseFile (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+    n0: 472 0x10952F: main (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+ n2: 771 0x109618: readLineBit (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+  n1: 771 0x109D4D: parseFile (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+   n0: 771 0x10952F: main (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+  n0: 0 in 3 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=19
+#-----------
+time=195556
+mem_heap_B=9650
+mem_heap_extra_B=94
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=20
+#-----------
+time=195625
+mem_heap_B=9907
+mem_heap_extra_B=117
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=21
+#-----------
+time=204682
+mem_heap_B=9650
+mem_heap_extra_B=94
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=22
+#-----------
+time=204751
+mem_heap_B=9907
+mem_heap_extra_B=117
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=23
+#-----------
+time=213800
+mem_heap_B=9650
+mem_heap_extra_B=94
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=24
+#-----------
+time=213869
+mem_heap_B=9907
+mem_heap_extra_B=117
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=25
+#-----------
+time=222923
+mem_heap_B=9650
+mem_heap_extra_B=94
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=26
+#-----------
+time=222992
+mem_heap_B=9907
+mem_heap_extra_B=117
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=27
+#-----------
+time=232044
+mem_heap_B=9650
+mem_heap_extra_B=94
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=28
+#-----------
+time=232113
+mem_heap_B=9907
+mem_heap_extra_B=117
+mem_stacks_B=0
+heap_tree=detailed
+n3: 9907 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 8192 0x48C548B: _IO_file_doallocate (filedoalloc.c:101)
+  n1: 8192 0x48D40BF: _IO_doallocbuf (genops.c:347)
+   n2: 8192 0x48D40BF: _IO_doallocbuf (genops.c:342)
+    n1: 4096 0x48D2E7B: _IO_file_underflow@@GLIBC_2.2.5 (fileops.c:485)
+     n1: 4096 0x48D4171: _IO_default_uflow (genops.c:362)
+      n1: 4096 0x109866: readLineBit (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+       n1: 4096 0x109C91: parseFile (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+        n0: 4096 0x10952F: main (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+    n1: 4096 0x48D3157: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:744)
+     n1: 4096 0x48D229D: _IO_new_file_xsputn (fileops.c:1243)
+      n1: 4096 0x48D229D: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1196)
+       n1: 4096 0x48C6A64: fwrite (iofwrite.c:39)
+        n1: 4096 0x109CF3: parseFile (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+         n0: 4096 0x10952F: main (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+ n1: 944 0x48C5F7A: __fopen_internal (iofopen.c:65)
+  n2: 944 0x10A080: openFile (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+   n1: 472 0x109C1A: parseFile (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+    n0: 472 0x10952F: main (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+   n1: 472 0x109C37: parseFile (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+    n0: 472 0x10952F: main (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+ n2: 771 0x109618: readLineBit (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+  n1: 771 0x109D4D: parseFile (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+   n0: 771 0x10952F: main (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+  n0: 0 in 3 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=29
+#-----------
+time=241296
+mem_heap_B=9650
+mem_heap_extra_B=94
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=30
+#-----------
+time=241326
+mem_heap_B=9393
+mem_heap_extra_B=71
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=31
+#-----------
+time=241356
+mem_heap_B=9136
+mem_heap_extra_B=48
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=32
+#-----------
+time=242280
+mem_heap_B=5040
+mem_heap_extra_B=40
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=33
+#-----------
+time=242409
+mem_heap_B=4568
+mem_heap_extra_B=24
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=34
+#-----------
+time=242760
+mem_heap_B=472
+mem_heap_extra_B=16
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=35
+#-----------
+time=242889
+mem_heap_B=0
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=36
+#-----------
+time=243011
+mem_heap_B=472
+mem_heap_extra_B=16
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=37
+#-----------
+time=243525
+mem_heap_B=944
+mem_heap_extra_B=32
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=38
+#-----------
+time=244232
+mem_heap_B=472
+mem_heap_extra_B=16
+mem_stacks_B=0
+heap_tree=detailed
+n2: 472 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 472 0x48C5F7A: __fopen_internal (iofopen.c:65)
+  n2: 472 0x10A080: openFile (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+   n0: 472 0x109548: main (in /mnt/c/Users/golas/JIMP/LabiryntJimp2/bin/bin.exe)
+   n0: 0 in 3 places, all below massif's threshold (1.00%)
+ n0: 0 in 2 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=39
+#-----------
+time=244337
+mem_heap_B=944
+mem_heap_extra_B=32
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=40
+#-----------
+time=245702
+mem_heap_B=5040
+mem_heap_extra_B=40
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=41
+#-----------
+time=247935
+mem_heap_B=9136
+mem_heap_extra_B=48
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=42
+#-----------
+time=447465
+mem_heap_B=5040
+mem_heap_extra_B=40
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=43
+#-----------
+time=447594
+mem_heap_B=4568
+mem_heap_extra_B=24
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=44
+#-----------
+time=451434
+mem_heap_B=472
+mem_heap_extra_B=16
+mem_stacks_B=0
+heap_tree=empty
