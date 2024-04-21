@@ -8,9 +8,14 @@
 #include "macros.h"
 #include "reports.h"
 
+#define QUEUE_CACHE_SIZE 1000
+
 typedef struct Queue {
     FILE* queueData;
+    node_t* queueCache;
     UCHAR isEmpty : 1;
+    USHORT cacheBegin;
+    USHORT cacheEnd;
 } queue_t;
 
 #define Q_ISEMPTY(queue) feof((queue)->queueData)

@@ -37,7 +37,6 @@ int main(int argc, char** argv) {
     parseFile(input_file);
 
     FILE* nodes = openFile(TEMP_NODE_FILENAME, "r+");
-
     if(bfs(nodes, endX, endY, startX, startY)) {
         R_WARNING("Labirynt nie ma wyjscia!");
     }
