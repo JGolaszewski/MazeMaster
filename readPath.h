@@ -7,4 +7,5 @@
 #include "macros.h"
 #include "reports.h"
 
-void readPath(FILE* Nodes, node_t startNode, USHORT endx, USHORT endy);
+void dispayPath(FILE* Nodes, node_t startNode, USHORT endx, USHORT endy);
+void writePathToFile(FILE* Nodes, node_t startNode, USHORT endx, USHORT endy,char* output_file );

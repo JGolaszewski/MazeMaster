@@ -32,17 +32,21 @@ int main(int argc, char** argv) {
     R_VERBOSE("Input file: %s", input_file);
     R_VERBOSE("Output file: %s", (output_file==NULL)? "Not specified": output_file);
 
-    R_VERBOSE("Parsing to graph...");
+    R_INFO("Parsing to graph...");
     
     parseFile(input_file);
-
-    R_VERBOSE("BFS start...");
-    
+    R_INFO("BFS start...");
     FILE* nodes = openFile(TEMP_NODE_FILENAME, "r+");
-    if(bfs(nodes, endX, endY, startX, startY)) {
+
+    if(bfs(nodes, fileData.endX, fileData.endY, fileData.startX, fileData.startY)) {
         R_WARNING("Labirynt nie ma wyjscia!");
+    } else {
+        R_INFO("Found exit path");
     }
     
-    //readPath(nodes, getNode(nodes,startX,startY) ,endX,endY);
+ if(output_file!=NULL){
+       writePathToFile(nodes, getNode(nodes,fileData.startX,fileData.startY) ,fileData.endX,fileData.endY,output_file);}
+	else{
+    displayPath(nodes, getNode(nodes,fileData.startX,fileData.startY) ,fileData.endX,fileData.endY);}
     return 0;
 }

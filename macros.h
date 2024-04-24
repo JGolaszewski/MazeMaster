@@ -3,6 +3,9 @@
 //PROBLEM SPECIFICATION
 #define MAX_LINE_WIDTH 2049
 #define WALL_CHAR 'X'
+#define PATH_CHAR ' '
+#define START_CHAR 'P'
+#define END_CHAR 'K'
 
 //TYPE MAKRO
 #define UINT unsigned int
