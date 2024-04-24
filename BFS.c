@@ -18,6 +18,7 @@ int bfs(FILE* Nodes, USHORT currentx, USHORT currenty, USHORT endx, USHORT endy)
 			return 0;
 		}
 
+		R_VERBOSE("Adding nodes that are next to current node to queue...");
 		if(N_ADJ_LEFT(cur_node)) {
 		    nextNode = getNode(Nodes, cur_node.x - 1, cur_node.y);
 		    if(nextNode.data.flag == 0) {

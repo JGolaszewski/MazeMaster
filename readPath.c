@@ -4,6 +4,7 @@ void displayPath(FILE* Nodes, node_t startNode, USHORT endx, USHORT endy) {
  	
 int forward = 0;
     node_t lastNode;
+    R_VERBOSE("Reading path started..");
     printf("START\n");
     while (startNode.x!=endx || startNode.y!=endy) {
       	lastNode= startNode;
@@ -60,11 +61,12 @@ int forward = 0;
 		forward =0 ;
         };
 
- 	R_VERBOSE("Going into: %d %d", startNode.x, startNode.y);
+ 	 R_DEBUG("Going into: %d %d", startNode.x, startNode.y);
  	
 
     }
    printf("STOP\n");
+   R_VERBOSE("Path is ready");
 }
 
 #include "readPath.h"
@@ -74,7 +76,9 @@ void writePathToFile(FILE* Nodes, node_t startNode, USHORT endx, USHORT endy,cha
 int forward = 0;
     node_t lastNode;
     FILE *output=fopen(output_file ,"w");
+    R_VERBOSE("Opening file to write...");
     fprintf(output,"START\n");
+    R_VERBOSE("Start writing to file");
     while (startNode.x!=endx || startNode.y!=endy) {
       	lastNode= startNode;
       	forward++;        
@@ -129,13 +133,13 @@ int forward = 0;
 		fprintf(output,"TURNRIGHT\n");
 		forward =0 ;
         };
-
- 	R_VERBOSE("Going into: %d %d", startNode.x, startNode.y);
+	 R_DEBUG("Going into: %d %d", startNode.x, startNode.y);
  	
 
     }
    fprintf(output,"STOP\n");
    fclose(output);
+   R_VERBOSE("Every data was written to file and output file closed successfully");
 }
 
 
