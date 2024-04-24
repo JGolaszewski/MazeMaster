@@ -43,6 +43,9 @@ int main(int argc, char** argv) {
         R_WARNING("Labirynt nie ma wyjscia!");
     }
     
-    //readPath(nodes, getNode(nodes,startX,startY) ,endX,endY);
+    if(output_file!=NULL){
+       writePathToFile(nodes, getNode(nodes,startX,startY) ,endX,endY,output_file);}
+	else{
+    displayPath(nodes, getNode(nodes,startX,startY) ,endX,endY);}
     return 0;
 }
