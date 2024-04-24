@@ -24,7 +24,7 @@ int forward = 0;
         
         
 	
-	if(startNode.data.parent == lastNode.data.parent == BOTTOM){
+	if(startNode.data.parent == lastNode.data.parent  && lastNode.data.parent == BOTTOM){
 		continue;
 	}
 	else if (startNode.data.parent == LEFT && lastNode.data.parent == TOP){
@@ -75,7 +75,7 @@ void writePathToFile(FILE* Nodes, node_t startNode, USHORT endx, USHORT endy,cha
  	
 int forward = 0;
     node_t lastNode;
-    FILE *output=fopen(output_file ,"w");
+    FILE *output=openFile(output_file ,"w");
     R_VERBOSE("Opening file to write...");
     fprintf(output,"START\n");
     R_VERBOSE("Start writing to file");
@@ -97,7 +97,7 @@ int forward = 0;
         
         
 	
-	if(startNode.data.parent == lastNode.data.parent == BOTTOM){
+	if(startNode.data.parent == lastNode.data.parent && lastNode.data.parent == BOTTOM){
 		continue;
 	}
 	else if (startNode.data.parent == LEFT && lastNode.data.parent == TOP){

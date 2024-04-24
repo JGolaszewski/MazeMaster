@@ -18,18 +18,15 @@ typedef struct FileHeader {
     USHORT startY : 16;
     USHORT endX : 16;
     USHORT endY : 16;
-    int reserved1 : 32;
-    int reserved2 : 32;
-    int reserved3 : 32;
+    char reserved[12];
     UINT counter : 32; //Number of code words
     UINT solutionOffset : 32;
     char separator : 8;
     char wall : 8;
     char path : 8;
-} fileHeader_h;
+} __attribute__((packed)) fileHeader_h;
 
 typedef struct CodeWords {
-    char separator : 8;
     char value : 8;
     UCHAR count : 8;
 } codeWord_t;
@@ -38,7 +35,7 @@ extern UCHAR isBinary;
 extern fileHeader_h fileData;
 
 void readLineBit(FILE* in, char** outBuffer);
-void binReadLineBit(FILE* in, char** outBuffer);
+void binDecode(FILE* in);
 void toGraph(FILE* tempF, char* buffers[3], const USHORT height);
 USHORT preParser(FILE* file);
 void parseFile(const char* filename);

@@ -7,6 +7,7 @@
 #include "interface.h"
 #include "reports.h"
 #include "BFS.h"
+#include "readPath.h"
 
 #include "queue.h"
 
@@ -43,10 +44,8 @@ int main(int argc, char** argv) {
     } else {
         R_INFO("Found exit path");
     }
-    
- if(output_file!=NULL){
-       writePathToFile(nodes, getNode(nodes,fileData.startX,fileData.startY) ,fileData.endX,fileData.endY,output_file);}
-	else{
-    displayPath(nodes, getNode(nodes,fileData.startX,fileData.startY) ,fileData.endX,fileData.endY);}
+
+    writePathToFile(nodes, getNode(nodes, fileData.startX, fileData.startY), fileData.endX, fileData.endY, "./output/out.txt");
+    fclose(nodes);
     return 0;
 }

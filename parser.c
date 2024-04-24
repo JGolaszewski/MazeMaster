@@ -20,10 +20,10 @@ void readLineBit(FILE* in, char** outBuffer) {
 
     //READ ONE LINE IN BITS
     while(((currentChar = fgetc(in)) != '\n') && !feof(in)) {
-        if(currentChar == START_CHAR) {
+        if(!isBinary && currentChar == START_CHAR) {
             fileData.startX = pos;
             R_VERBOSE("Found start tile in position x: %d y: %d", fileData.startX, fileData.startY)
-        } else if(currentChar == END_CHAR) {
+        } else if(!isBinary && currentChar == END_CHAR) {
             fileData.endX = (pos);
             R_VERBOSE("Found finish tile in position x: %d y: %d", fileData.endX, fileData.endY)
         }
@@ -52,12 +52,33 @@ void readLineBit(FILE* in, char** outBuffer) {
     //SHIFT ALL LOADED BITS TO LEFT IN LAST BYTE
     (*outBuffer)[pos/8] <<= 7 - pos%8;
 
-    if(fileData.startX == USHRT_MAX) fileData.startY++;
-    if(fileData.endX == USHRT_MAX) fileData.endY++;
+    if(!isBinary && fileData.startX == USHRT_MAX) fileData.startY++;
+    if(!isBinary && fileData.endX == USHRT_MAX) fileData.endY++;
 }
 
-void binReadLineBit(FILE* in, char** outBuffer) {
-    
+void binDecode(FILE* in) {
+    //rewind(in);
+    R_DEBUG("%ld", sizeof(fileHeader_h));
+    UCHAR sep = 0;
+    FILE* newIn = openFile(DECODED_FILENAME, "w");
+    codeWord_t codeWord;
+    codeWord.count = 0;
+    codeWord.value = 0;
+    int c = -1;
+    long long t = 0;
+    while(!feof(in)) {
+        fread(&sep, sizeof(UCHAR), 1, in);
+        if(sep == fileData.separator) c++;
+        if(sep == fileData.separator && c >= 0 && c < fileData.counter) {
+            fread(&codeWord, sizeof(codeWord_t), 1, in);
+            for(int i=0; i <= codeWord.count; i++) {
+                if(t != 0 && t%fileData.columns == 0) fprintf(newIn, "\n");
+                fprintf(newIn, "%c", codeWord.value);
+                t++;
+            }
+        }
+    }
+    fclose(newIn);
 }
 
 void toGraph(FILE* tempF, char* buffers[3], const USHORT height) {
@@ -90,12 +111,10 @@ USHORT preParser(FILE* file) {
         fread(&fileData, sizeof(fileHeader_h), 1, file);
 
         R_WARNING("Detected binary input file, output file will be ignored if provided");
-        fileData.columns = fileData.columns * 2 - 1;
-        fileData.lines = fileData.lines * 2 - 1;
         fileData.startX--;
         fileData.startY--;
-        fileData.endX = (fileData.endX - 1) * 2;
-        fileData.endY = (fileData.endY - 1 ) * 2 + 1;
+        fileData.endX--;
+        fileData.endY--;
         R_DEBUG("Size: %d %d  Start: %d %d  End: %d %d  Wall: %c  Path: %c", fileData.columns, fileData.lines, fileData.startX, fileData.startY, fileData.endX, fileData.endY, fileData.wall, fileData.path);
         R_DEBUG("Pre parser end...");
         return 0;
@@ -179,15 +198,14 @@ void parseFile(const char* filename) {
 
     //READ 3 FIRST LINES
     if(isBinary) {
-        binReadLineBit(in, &buffers[0]);
-        return;
-        binReadLineBit(in, &buffers[1]);
-        binReadLineBit(in, &buffers[2]);
-    } else {
-        readLineBit(in, &buffers[0]);
-        readLineBit(in, &buffers[1]);
-        readLineBit(in, &buffers[2]);
+        binDecode(in);
+        fclose(in);
+        in = openFile(DECODED_FILENAME, "r");
     }
+    
+    readLineBit(in, &buffers[0]);
+    readLineBit(in, &buffers[1]);
+    readLineBit(in, &buffers[2]);
 
     while(!feof(in)) {
         //FIND INTERSECTIONS / TURN
