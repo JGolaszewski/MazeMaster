@@ -42,7 +42,6 @@ void parse_args(int argc, char** argv, char** inFilename, char** outFilename) {
 FILE* openFile(const char* filename, const char* mode) {
     int idMode = -1;
     USHORT it = 0;
-
     while(mode[it] != '\0') if(mode[it++] == 'r') idMode = F_OK;
     if(idMode != -1 && access(filename, idMode)) R_ERROR("Couldt open file: %s", filename);
 

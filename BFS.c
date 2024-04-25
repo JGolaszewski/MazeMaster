@@ -10,7 +10,7 @@ int bfs(FILE* Nodes, USHORT currentx, USHORT currenty, USHORT endx, USHORT endy)
     
     while(!queue.isEmpty) {
         cur_node = pop_q(&queue);
-		if(N_IS_INVALID(cur_node)) R_ERROR("INVALID NODE");
+		if(N_IS_INVALID(cur_node)) R_ERROR(" (BFS) Unexpected algorithm behavior casued by unknown error in input file, terminating program...");
         R_DEBUG("Current node: %d %d %d", cur_node.x, cur_node.y, cur_node.data.adj);
 		
         if(cur_node.x == endx && cur_node.y == endy) {
@@ -18,7 +18,6 @@ int bfs(FILE* Nodes, USHORT currentx, USHORT currenty, USHORT endx, USHORT endy)
 			return 0;
 		}
 
-		R_VERBOSE("Adding nodes that are next to current node to queue...");
 		if(N_ADJ_LEFT(cur_node)) {
 		    nextNode = getNode(Nodes, cur_node.x - 1, cur_node.y);
 		    if(nextNode.data.flag == 0) {

@@ -7,6 +7,8 @@
 #include "macros.h"
 #include "reports.h"
 #include "macros.h"
+#include "parser.h"
 
-void dispayPath(FILE* Nodes, node_t startNode, USHORT endx, USHORT endy);
 void writePathToFile(FILE* Nodes, node_t startNode, USHORT endx, USHORT endy,char* output_file );
+void writePathToBinary(FILE* Nodes, node_t startNode, USHORT endx, USHORT endy, char* output_file );
+void displayPath(FILE* Nodes, node_t startNode, USHORT endx, USHORT endy);

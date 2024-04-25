@@ -45,7 +45,19 @@ int main(int argc, char** argv) {
         R_INFO("Found exit path");
     }
 
-    writePathToFile(nodes, getNode(nodes, fileData.startX, fileData.startY), fileData.endX, fileData.endY, "./output/out.txt");
+    if(!isBinary) {
+        chdir("./output");
+        if(output_file != NULL) {
+            writePathToFile(nodes, getNode(nodes, fileData.startX, fileData.startY), fileData.endX, fileData.endY, output_file);
+        }
+        else {
+            displayPath(nodes, getNode(nodes, fileData.startX, fileData.startY), fileData.endX, fileData.endY);
+        }
+    }
+    else {
+        writePathToBinary(nodes, getNode(nodes, fileData.startX, fileData.startY), fileData.endX, fileData.endY, input_file);
+    }
+
     fclose(nodes);
     return 0;
 }
